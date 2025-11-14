@@ -97,7 +97,7 @@ def make_lmdb_from_imgs(data_path,
         data_size_per_img = img_byte.nbytes
         print('Data size per image is: ', data_size_per_img)
         data_size = data_size_per_img * len(img_path_list)
-        map_size = data_size * 10
+        map_size = data_size * 1.5
 
     env = lmdb.open(lmdb_path, map_size=map_size)
 

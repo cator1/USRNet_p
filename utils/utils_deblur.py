@@ -86,19 +86,19 @@ def cconj(t, inplace=False):
 
 
 def rfft(t):
-    return torch.rfft(t, 2, onesided=False)
+    return torch.fft.fft2(t, norm="ortho")
 
 
 def irfft(t):
-    return torch.irfft(t, 2, onesided=False)
+    return torch.fft.ifft2(t, norm="ortho")
 
 
 def fft(t):
-    return torch.fft(t, 2)
+    return torch.fft.fft2(t, norm="ortho")
 
 
 def ifft(t):
-    return torch.ifft(t, 2)
+    return torch.fft.ifft2(t, norm="ortho")
 
 
 def p2o(psf, shape):
@@ -491,7 +491,7 @@ def fspecial_gaussian(hsize, sigma):
     [x, y] = np.meshgrid(np.arange(-siz[1], siz[1]+1), np.arange(-siz[0], siz[0]+1))
     arg = -(x*x + y*y)/(2*std*std)
     h = np.exp(arg)
-    h[h < scipy.finfo(float).eps * h.max()] = 0
+    h[h < np.finfo(float).eps * h.max()] = 0
     sumh = h.sum()
     if sumh != 0:
         h = h/sumh

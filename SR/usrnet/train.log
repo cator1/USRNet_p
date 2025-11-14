@@ -1,0 +1,3504 @@
+25-10-21 16:12:06.215 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-21 16:42:35.102 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-21 16:42:35.795 : Number of train images: 900, iters: 19
+25-10-22 14:59:53.621 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 14:59:54.719 : Number of train images: 3,550, iters: 74
+25-10-22 15:15:54.999 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 15:15:56.044 : Number of train images: 3,550, iters: 74
+25-10-22 15:15:58.005 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 15:15:58.046 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.092 |  0.086 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ |  0.001 | -0.056 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.000 | -0.062 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ |  0.000 | -0.055 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ |  0.000 | -0.055 |  0.053 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ |  0.000 | -0.099 |  0.083 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ | -0.000 | -0.045 |  0.058 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.051 |  0.052 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.043 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.039 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.069 |  0.068 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ |  0.000 | -0.034 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.038 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ | -0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ | -0.000 | -0.046 |  0.049 |  0.012 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.036 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.058 |  0.047 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.032 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ | -0.000 | -0.036 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.067 |  0.062 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.046 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.051 |  0.040 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.048 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ |  0.000 | -0.052 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ |  0.000 | -0.097 |  0.075 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ | -0.000 | -0.054 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.001 | -0.051 |  0.053 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.001 | -0.066 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ | -0.000 | -0.062 |  0.056 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ |  0.000 | -0.045 |  0.045 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ | -0.000 | -0.077 |  0.081 |  0.036 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ |  0.000 | -0.103 |  0.117 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ |  0.003 | -0.096 |  0.093 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 15:21:55.237 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 15:21:55.772 : Number of train images: 3,550, iters: 74
+25-10-22 15:21:57.213 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 15:21:57.248 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.001 | -0.093 |  0.107 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ |  0.001 | -0.057 |  0.057 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.000 | -0.053 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ | -0.001 | -0.058 |  0.067 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ | -0.001 | -0.058 |  0.057 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ |  0.001 | -0.087 |  0.079 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ | -0.000 | -0.042 |  0.051 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ | -0.000 | -0.047 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ |  0.000 | -0.042 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ |  0.000 | -0.048 |  0.046 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.072 |  0.060 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ |  0.000 | -0.031 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ | -0.000 | -0.034 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ |  0.000 | -0.036 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ | -0.000 | -0.050 |  0.046 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.000 | -0.033 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ | -0.000 | -0.038 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ |  0.000 | -0.031 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ |  0.000 | -0.043 |  0.048 |  0.012 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ | -0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ |  0.000 | -0.032 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ | -0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ |  0.000 | -0.062 |  0.068 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.044 |  0.048 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ |  0.000 | -0.046 |  0.047 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.041 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ |  0.000 | -0.044 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.001 | -0.090 |  0.074 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.000 | -0.053 |  0.056 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.000 | -0.074 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ | -0.000 | -0.051 |  0.062 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.000 | -0.056 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.000 | -0.062 |  0.047 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.003 | -0.069 |  0.064 |  0.036 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ |  0.000 | -0.102 |  0.115 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ |  0.000 | -0.092 |  0.091 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:34:18.847 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:34:19.804 : Number of train images: 3,550, iters: 74
+25-10-22 18:34:22.299 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:34:22.392 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.002 | -0.092 |  0.095 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.000 | -0.062 |  0.065 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ |  0.000 | -0.049 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ |  0.000 | -0.060 |  0.065 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ |  0.000 | -0.051 |  0.065 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.001 | -0.089 |  0.091 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ |  0.000 | -0.045 |  0.054 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.042 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.042 |  0.042 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.046 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ |  0.000 | -0.065 |  0.069 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.038 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ |  0.000 | -0.033 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ | -0.000 | -0.037 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ | -0.000 | -0.043 |  0.050 |  0.012 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ |  0.000 | -0.032 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.034 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ |  0.000 | -0.032 |  0.040 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ |  0.000 | -0.047 |  0.050 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ |  0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ | -0.000 | -0.035 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ |  0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.036 |  0.040 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ |  0.000 | -0.069 |  0.066 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ |  0.000 | -0.050 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ |  0.000 | -0.039 |  0.038 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.044 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ |  0.000 | -0.042 |  0.042 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.000 | -0.083 |  0.084 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.000 | -0.063 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ |  0.000 | -0.051 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ | -0.001 | -0.068 |  0.057 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.000 | -0.062 |  0.064 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.002 | -0.053 |  0.040 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ | -0.003 | -0.084 |  0.095 |  0.035 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ |  0.000 | -0.100 |  0.101 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ | -0.003 | -0.108 |  0.086 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:37:20.187 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:37:21.166 : Number of train images: 3,550, iters: 74
+25-10-22 18:37:24.332 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:37:24.432 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.114 |  0.098 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.000 | -0.059 |  0.050 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.000 | -0.055 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ | -0.000 | -0.052 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ |  0.000 | -0.060 |  0.060 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.000 | -0.095 |  0.085 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ | -0.000 | -0.048 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.049 |  0.053 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ |  0.000 | -0.046 |  0.049 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.046 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.066 |  0.066 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ | -0.000 | -0.037 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ | -0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ | -0.000 | -0.034 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ |  0.000 | -0.051 |  0.051 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ |  0.000 | -0.031 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.031 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ |  0.000 | -0.043 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.049 |  0.057 |  0.012 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ |  0.000 | -0.035 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ | -0.000 | -0.036 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ |  0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ | -0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ |  0.000 | -0.069 |  0.069 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.044 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.046 |  0.054 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.046 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ |  0.000 | -0.045 |  0.046 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.001 | -0.075 |  0.084 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.001 | -0.053 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ |  0.000 | -0.053 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.001 | -0.052 |  0.063 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ | -0.000 | -0.054 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.001 | -0.043 |  0.043 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.003 | -0.072 |  0.080 |  0.036 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ | -0.000 | -0.113 |  0.099 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ | -0.001 | -0.090 |  0.078 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:45:11.469 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:45:12.725 : Number of train images: 3,550, iters: 74
+25-10-22 18:45:15.378 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:45:15.476 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.002 | -0.100 |  0.112 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.000 | -0.055 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ |  0.001 | -0.065 |  0.054 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ |  0.000 | -0.054 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ |  0.001 | -0.059 |  0.058 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ |  0.001 | -0.077 |  0.084 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ | -0.000 | -0.042 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ | -0.000 | -0.041 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.046 |  0.040 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.049 |  0.048 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.065 |  0.074 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ |  0.000 | -0.031 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ |  0.000 | -0.036 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ | -0.000 | -0.047 |  0.049 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.000 | -0.033 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.032 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ | -0.000 | -0.037 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ | -0.000 | -0.032 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ |  0.000 | -0.047 |  0.051 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ | -0.000 | -0.032 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.035 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.072 |  0.058 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.054 |  0.050 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.043 |  0.046 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.043 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ | -0.000 | -0.052 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.000 | -0.079 |  0.092 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.000 | -0.063 |  0.056 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.000 | -0.053 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.000 | -0.055 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.000 | -0.059 |  0.056 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ |  0.000 | -0.044 |  0.058 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.007 | -0.103 |  0.070 |  0.035 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ |  0.001 | -0.092 |  0.106 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ |  0.001 | -0.081 |  0.107 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:50:49.632 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:50:51.137 : Number of train images: 3,550, iters: 74
+25-10-22 18:50:53.830 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:50:53.925 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.000 | -0.095 |  0.096 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.000 | -0.058 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.000 | -0.059 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ |  0.000 | -0.057 |  0.058 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ | -0.000 | -0.056 |  0.049 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ |  0.000 | -0.084 |  0.092 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ |  0.000 | -0.043 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ | -0.000 | -0.046 |  0.049 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.043 |  0.040 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.048 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ |  0.000 | -0.066 |  0.064 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.041 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ | -0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ |  0.000 | -0.032 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ | -0.000 | -0.043 |  0.049 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.033 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ |  0.000 | -0.035 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.051 |  0.047 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ |  0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.078 |  0.066 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ |  0.000 | -0.041 |  0.048 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.049 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.045 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ | -0.000 | -0.042 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.001 | -0.081 |  0.078 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ | -0.000 | -0.056 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.000 | -0.053 |  0.050 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.000 | -0.054 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ | -0.000 | -0.058 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.000 | -0.040 |  0.047 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.001 | -0.075 |  0.104 |  0.036 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ | -0.001 | -0.110 |  0.103 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ | -0.000 | -0.101 |  0.105 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:53:30.570 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:53:31.436 : Number of train images: 3,550, iters: 74
+25-10-22 18:53:34.389 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:53:34.431 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.107 |  0.100 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ |  0.000 | -0.050 |  0.062 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ |  0.001 | -0.051 |  0.058 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ |  0.000 | -0.061 |  0.066 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ | -0.001 | -0.063 |  0.058 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.000 | -0.089 |  0.096 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ |  0.000 | -0.045 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.046 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.055 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.000 | -0.045 |  0.051 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ |  0.000 | -0.064 |  0.061 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ |  0.000 | -0.033 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.036 |  0.037 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ |  0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ |  0.000 | -0.062 |  0.045 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.000 | -0.037 |  0.030 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.032 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ | -0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ |  0.000 | -0.032 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ |  0.000 | -0.050 |  0.050 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ |  0.000 | -0.031 |  0.042 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ |  0.000 | -0.034 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.038 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.062 |  0.064 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.041 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.041 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.043 |  0.045 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ | -0.000 | -0.040 |  0.044 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.000 | -0.082 |  0.083 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ | -0.001 | -0.064 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.000 | -0.056 |  0.067 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ | -0.000 | -0.057 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.000 | -0.050 |  0.055 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ |  0.001 | -0.039 |  0.050 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.001 | -0.082 |  0.078 |  0.036 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ | -0.002 | -0.114 |  0.101 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ |  0.000 | -0.093 |  0.115 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 18:56:31.160 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: None
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-22 18:56:32.247 : Number of train images: 3,550, iters: 74
+25-10-22 18:56:35.163 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-22 18:56:35.268 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.099 |  0.100 |  0.033 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ |  0.000 | -0.062 |  0.062 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.000 | -0.058 |  0.052 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ | -0.000 | -0.056 |  0.058 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ |  0.000 | -0.059 |  0.056 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.001 | -0.092 |  0.088 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ |  0.000 | -0.044 |  0.043 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.049 |  0.046 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.043 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ |  0.000 | -0.043 |  0.048 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.065 |  0.063 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.032 |  0.030 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ | -0.000 | -0.036 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ | -0.000 | -0.035 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ | -0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ |  0.000 | -0.048 |  0.049 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.033 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.032 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ | -0.000 | -0.032 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.046 |  0.044 |  0.013 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.033 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ | -0.000 | -0.047 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.039 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.063 |  0.063 |  0.018 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.039 |  0.047 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.000 | -0.050 |  0.047 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ | -0.000 | -0.042 |  0.041 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ | -0.000 | -0.043 |  0.042 |  0.012 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ |  0.000 | -0.089 |  0.080 |  0.025 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.000 | -0.061 |  0.050 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.000 | -0.050 |  0.059 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.000 | -0.049 |  0.053 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ | -0.000 | -0.054 |  0.051 |  0.017 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ |  0.002 | -0.041 |  0.050 |  0.017 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.004 | -0.081 |  0.080 |  0.035 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.0.bias
+ | -0.000 | -0.118 |  0.109 |  0.035 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([32]) || h.mlp.2.bias
+ |  0.002 | -0.110 |  0.103 |  0.035 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-22 19:01:12.282 : <epoch:  2, iter:     200, lr:1.000e-04> G_loss: 2.518e-01 
+25-10-22 19:06:29.364 : <epoch:  5, iter:     400, lr:1.000e-04> G_loss: 9.798e-02 
+25-10-22 19:11:11.981 : <epoch:  8, iter:     600, lr:1.000e-04> G_loss: 1.121e-01 
+25-10-22 19:15:11.497 : <epoch: 10, iter:     800, lr:1.000e-04> G_loss: 9.331e-02 
+25-10-22 19:19:55.250 : <epoch: 13, iter:   1,000, lr:1.000e-04> G_loss: 9.085e-02 
+25-10-22 19:24:08.214 : <epoch: 16, iter:   1,200, lr:1.000e-04> G_loss: 1.120e-01 
+25-10-22 19:27:40.697 : <epoch: 19, iter:   1,400, lr:1.000e-04> G_loss: 1.031e-01 
+25-10-22 19:30:40.421 : <epoch: 21, iter:   1,600, lr:1.000e-04> G_loss: 9.437e-02 
+25-10-22 19:35:18.635 : <epoch: 24, iter:   1,800, lr:1.000e-04> G_loss: 8.436e-02 
+25-10-22 19:40:09.972 : <epoch: 27, iter:   2,000, lr:1.000e-04> G_loss: 8.471e-02 
+25-10-22 19:44:51.619 : <epoch: 30, iter:   2,200, lr:1.000e-04> G_loss: 9.371e-02 
+25-10-22 19:48:50.322 : <epoch: 32, iter:   2,400, lr:1.000e-04> G_loss: 8.360e-02 
+25-10-22 19:53:29.700 : <epoch: 35, iter:   2,600, lr:1.000e-04> G_loss: 8.969e-02 
+25-10-22 19:58:13.574 : <epoch: 38, iter:   2,800, lr:1.000e-04> G_loss: 9.572e-02 
+25-10-22 20:02:47.076 : <epoch: 41, iter:   3,000, lr:1.000e-04> G_loss: 9.195e-02 
+25-10-22 20:06:58.412 : <epoch: 43, iter:   3,200, lr:1.000e-04> G_loss: 9.274e-02 
+25-10-22 20:11:33.523 : <epoch: 46, iter:   3,400, lr:1.000e-04> G_loss: 1.084e-01 
+25-10-22 20:16:14.883 : <epoch: 49, iter:   3,600, lr:1.000e-04> G_loss: 9.206e-02 
+25-10-22 20:20:53.455 : <epoch: 52, iter:   3,800, lr:1.000e-04> G_loss: 9.196e-02 
+25-10-22 20:25:05.377 : <epoch: 54, iter:   4,000, lr:1.000e-04> G_loss: 9.362e-02 
+25-10-22 20:29:56.647 : <epoch: 57, iter:   4,200, lr:1.000e-04> G_loss: 8.503e-02 
+25-10-22 20:35:15.448 : <epoch: 60, iter:   4,400, lr:1.000e-04> G_loss: 9.056e-02 
+25-10-22 20:40:07.251 : <epoch: 63, iter:   4,600, lr:1.000e-04> G_loss: 8.558e-02 
+25-10-22 20:44:53.470 : <epoch: 65, iter:   4,800, lr:1.000e-04> G_loss: 9.919e-02 
+25-10-22 20:50:11.262 : <epoch: 68, iter:   5,000, lr:1.000e-04> G_loss: 9.554e-02 
+25-10-22 20:50:11.262 : Saving the model.
+25-10-22 20:50:19.802 : ---1-->   baby.bmp | 18.53dB
+25-10-22 20:50:20.002 : ---2-->   bird.bmp | 16.10dB
+25-10-22 20:50:20.211 : ---3--> butterfly.bmp | 13.96dB
+25-10-22 20:50:20.419 : ---4-->   head.bmp | 20.59dB
+25-10-22 20:50:20.659 : ---5-->  woman.bmp | 18.16dB
+25-10-22 20:50:21.172 : <epoch: 68, iter:   5,000, Average PSNR : 17.47dB
+
+25-10-22 20:54:46.676 : <epoch: 71, iter:   5,200, lr:1.000e-04> G_loss: 8.670e-02 
+25-10-22 20:59:00.925 : <epoch: 73, iter:   5,400, lr:1.000e-04> G_loss: 8.702e-02 
+25-10-22 21:05:14.509 : <epoch: 76, iter:   5,600, lr:1.000e-04> G_loss: 1.111e-01 
+25-10-22 21:11:07.044 : <epoch: 79, iter:   5,800, lr:1.000e-04> G_loss: 9.176e-02 
+25-10-22 21:16:56.141 : <epoch: 82, iter:   6,000, lr:1.000e-04> G_loss: 7.849e-02 
+25-10-22 21:39:18.760 : <epoch: 84, iter:   6,200, lr:1.000e-04> G_loss: 8.519e-02 
+25-10-22 21:43:01.925 : <epoch: 87, iter:   6,400, lr:1.000e-04> G_loss: 8.091e-02 
+25-10-22 21:46:41.399 : <epoch: 90, iter:   6,600, lr:1.000e-04> G_loss: 1.004e-01 
+25-10-22 21:50:49.094 : <epoch: 93, iter:   6,800, lr:1.000e-04> G_loss: 7.633e-02 
+25-10-22 21:54:10.376 : <epoch: 95, iter:   7,000, lr:1.000e-04> G_loss: 9.601e-02 
+25-10-22 21:58:09.692 : <epoch: 98, iter:   7,200, lr:1.000e-04> G_loss: 9.751e-02 
+25-10-22 22:01:31.692 : <epoch:101, iter:   7,400, lr:1.000e-04> G_loss: 9.171e-02 
+25-10-22 22:04:45.768 : <epoch:104, iter:   7,600, lr:1.000e-04> G_loss: 7.571e-02 
+25-10-22 22:07:23.270 : <epoch:106, iter:   7,800, lr:1.000e-04> G_loss: 9.464e-02 
+25-10-22 22:10:32.281 : <epoch:109, iter:   8,000, lr:1.000e-04> G_loss: 9.472e-02 
+25-10-22 22:13:46.238 : <epoch:112, iter:   8,200, lr:1.000e-04> G_loss: 8.555e-02 
+25-10-22 22:16:58.374 : <epoch:115, iter:   8,400, lr:1.000e-04> G_loss: 9.623e-02 
+25-10-22 22:19:31.368 : <epoch:117, iter:   8,600, lr:1.000e-04> G_loss: 8.470e-02 
+25-10-22 22:22:39.149 : <epoch:120, iter:   8,800, lr:1.000e-04> G_loss: 8.201e-02 
+25-10-22 22:25:52.753 : <epoch:123, iter:   9,000, lr:1.000e-04> G_loss: 9.000e-02 
+25-10-22 22:29:03.376 : <epoch:126, iter:   9,200, lr:1.000e-04> G_loss: 8.577e-02 
+25-10-22 22:31:44.573 : <epoch:128, iter:   9,400, lr:1.000e-04> G_loss: 8.464e-02 
+25-10-22 22:34:49.378 : <epoch:131, iter:   9,600, lr:1.000e-04> G_loss: 8.436e-02 
+25-10-22 22:37:51.190 : <epoch:134, iter:   9,800, lr:1.000e-04> G_loss: 7.712e-02 
+25-10-22 22:40:30.812 : <epoch:136, iter:  10,000, lr:1.000e-04> G_loss: 9.658e-02 
+25-10-22 22:40:30.812 : Saving the model.
+25-10-22 22:40:34.905 : ---1-->   baby.bmp | 18.68dB
+25-10-22 22:40:34.946 : ---2-->   bird.bmp | 16.58dB
+25-10-22 22:40:34.980 : ---3--> butterfly.bmp | 14.81dB
+25-10-22 22:40:35.012 : ---4-->   head.bmp | 21.07dB
+25-10-22 22:40:35.045 : ---5-->  woman.bmp | 18.82dB
+25-10-22 22:40:35.329 : <epoch:136, iter:  10,000, Average PSNR : 17.99dB
+
+25-10-22 22:43:37.960 : <epoch:139, iter:  10,200, lr:1.000e-04> G_loss: 8.765e-02 
+25-10-22 22:46:40.841 : <epoch:142, iter:  10,400, lr:1.000e-04> G_loss: 8.517e-02 
+25-10-22 22:49:42.164 : <epoch:145, iter:  10,600, lr:1.000e-04> G_loss: 8.331e-02 
+25-10-22 22:52:24.962 : <epoch:147, iter:  10,800, lr:1.000e-04> G_loss: 9.552e-02 
+25-10-22 22:55:39.047 : <epoch:150, iter:  11,000, lr:1.000e-04> G_loss: 9.154e-02 
+25-10-22 22:58:44.728 : <epoch:153, iter:  11,200, lr:1.000e-04> G_loss: 9.183e-02 
+25-10-22 23:01:52.961 : <epoch:156, iter:  11,400, lr:1.000e-04> G_loss: 7.502e-02 
+25-10-22 23:04:36.185 : <epoch:158, iter:  11,600, lr:1.000e-04> G_loss: 9.492e-02 
+25-10-22 23:07:47.384 : <epoch:161, iter:  11,800, lr:1.000e-04> G_loss: 9.181e-02 
+25-10-22 23:11:01.953 : <epoch:164, iter:  12,000, lr:1.000e-04> G_loss: 8.649e-02 
+25-10-22 23:14:17.072 : <epoch:167, iter:  12,200, lr:1.000e-04> G_loss: 8.960e-02 
+25-10-22 23:16:52.046 : <epoch:169, iter:  12,400, lr:1.000e-04> G_loss: 8.999e-02 
+25-10-22 23:19:58.245 : <epoch:172, iter:  12,600, lr:1.000e-04> G_loss: 8.926e-02 
+25-10-22 23:23:02.215 : <epoch:175, iter:  12,800, lr:1.000e-04> G_loss: 8.318e-02 
+25-10-22 23:26:19.615 : <epoch:178, iter:  13,000, lr:1.000e-04> G_loss: 7.850e-02 
+25-10-22 23:30:02.752 : <epoch:180, iter:  13,200, lr:1.000e-04> G_loss: 6.801e-02 
+25-10-22 23:34:06.475 : <epoch:183, iter:  13,400, lr:1.000e-04> G_loss: 8.891e-02 
+25-10-22 23:38:16.495 : <epoch:186, iter:  13,600, lr:1.000e-04> G_loss: 8.356e-02 
+25-10-22 23:42:25.297 : <epoch:189, iter:  13,800, lr:1.000e-04> G_loss: 8.603e-02 
+25-10-22 23:45:58.248 : <epoch:191, iter:  14,000, lr:1.000e-04> G_loss: 9.212e-02 
+25-10-22 23:50:04.492 : <epoch:194, iter:  14,200, lr:1.000e-04> G_loss: 8.601e-02 
+25-10-22 23:54:11.214 : <epoch:197, iter:  14,400, lr:1.000e-04> G_loss: 8.481e-02 
+25-10-22 23:57:42.364 : <epoch:199, iter:  14,600, lr:1.000e-04> G_loss: 8.382e-02 
+25-10-23 05:20:02.466 : <epoch:202, iter:  14,800, lr:1.000e-04> G_loss: 1.060e-01 
+25-10-23 05:23:38.188 : <epoch:205, iter:  15,000, lr:1.000e-04> G_loss: 8.331e-02 
+25-10-23 05:23:38.189 : Saving the model.
+25-10-23 05:23:44.687 : ---1-->   baby.bmp | 19.00dB
+25-10-23 05:23:44.740 : ---2-->   bird.bmp | 16.87dB
+25-10-23 05:23:44.783 : ---3--> butterfly.bmp | 15.47dB
+25-10-23 05:23:44.827 : ---4-->   head.bmp | 21.50dB
+25-10-23 05:23:44.879 : ---5-->  woman.bmp | 19.70dB
+25-10-23 05:23:45.294 : <epoch:205, iter:  15,000, Average PSNR : 18.51dB
+
+25-10-23 05:27:12.008 : <epoch:208, iter:  15,200, lr:1.000e-04> G_loss: 8.626e-02 
+25-10-23 05:30:21.023 : <epoch:210, iter:  15,400, lr:1.000e-04> G_loss: 8.724e-02 
+25-10-23 05:34:04.889 : <epoch:213, iter:  15,600, lr:1.000e-04> G_loss: 8.592e-02 
+25-10-23 16:11:43.611 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: SR\usrnet\models\15000_G.pth
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+    pretrained_netE: None
+    pretrained_optimizerG: None
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+  rank: 0
+  world_size: 1
+
+25-10-23 16:11:44.527 : Number of train images: 3,550, iters: 74
+25-10-23 16:11:46.471 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-10-23 16:11:46.560 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.001 | -0.124 |  0.111 |  0.037 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.005 | -0.091 |  0.059 |  0.021 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.003 | -0.133 |  0.128 |  0.024 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ | -0.004 | -0.111 |  0.115 |  0.024 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ | -0.009 | -0.246 |  0.248 |  0.058 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.001 | -0.094 |  0.106 |  0.028 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ | -0.000 | -0.089 |  0.079 |  0.014 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ |  0.000 | -0.060 |  0.062 |  0.013 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.000 | -0.097 |  0.095 |  0.013 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ |  0.000 | -0.082 |  0.081 |  0.015 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.000 | -0.155 |  0.073 |  0.020 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.000 | -0.085 |  0.101 |  0.014 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ | -0.000 | -0.218 |  0.147 |  0.015 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.106 |  0.095 |  0.015 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ | -0.000 | -0.092 |  0.088 |  0.017 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ |  0.000 | -0.092 |  0.089 |  0.016 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.000 | -0.125 |  0.145 |  0.015 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.157 |  0.177 |  0.020 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ | -0.000 | -0.139 |  0.101 |  0.016 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ | -0.000 | -0.129 |  0.144 |  0.021 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.087 |  0.075 |  0.015 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.000 | -0.123 |  0.117 |  0.016 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.193 |  0.314 |  0.019 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ | -0.000 | -0.150 |  0.105 |  0.016 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.173 |  0.160 |  0.019 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.000 | -0.101 |  0.123 |  0.021 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ | -0.000 | -0.067 |  0.067 |  0.014 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ | -0.001 | -0.251 |  0.332 |  0.025 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.000 | -0.214 |  0.143 |  0.019 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ | -0.000 | -0.353 |  0.273 |  0.030 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ | -0.000 | -0.095 |  0.091 |  0.028 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.001 | -0.106 |  0.131 |  0.024 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.003 | -0.495 |  0.318 |  0.048 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.002 | -0.113 |  0.069 |  0.019 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.002 | -0.377 |  0.326 |  0.032 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.003 | -0.067 |  0.066 |  0.023 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ |  0.012 | -0.081 |  0.157 |  0.046 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.012 | -0.033 |  0.093 |  0.031 | torch.Size([32]) || h.mlp.0.bias
+ |  0.002 | -0.118 |  0.150 |  0.038 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.011 | -0.006 |  0.066 |  0.018 | torch.Size([32]) || h.mlp.2.bias
+ |  0.005 | -0.338 |  0.366 |  0.103 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.008 | -0.232 |  0.246 |  0.155 | torch.Size([12]) || h.mlp.4.bias
+
+25-10-23 16:14:19.722 : <epoch:  2, iter:  15,200, lr:1.000e-04> G_loss: 1.160e-01 
+25-10-23 16:16:56.882 : <epoch:  5, iter:  15,400, lr:1.000e-04> G_loss: 2.362e-01 
+25-10-23 16:19:32.112 : <epoch:  8, iter:  15,600, lr:1.000e-04> G_loss: 1.043e-01 
+25-10-23 16:21:46.726 : <epoch: 10, iter:  15,800, lr:1.000e-04> G_loss: 9.592e-02 
+25-10-23 16:24:23.137 : <epoch: 13, iter:  16,000, lr:1.000e-04> G_loss: 8.998e-02 
+25-10-23 16:27:07.488 : <epoch: 16, iter:  16,200, lr:1.000e-04> G_loss: 1.143e-01 
+25-10-23 16:29:41.227 : <epoch: 19, iter:  16,400, lr:1.000e-04> G_loss: 9.427e-02 
+25-10-23 16:31:53.727 : <epoch: 21, iter:  16,600, lr:1.000e-04> G_loss: 8.359e-02 
+25-10-23 16:34:43.977 : <epoch: 24, iter:  16,800, lr:1.000e-04> G_loss: 8.568e-02 
+25-10-23 16:37:37.547 : <epoch: 27, iter:  17,000, lr:1.000e-04> G_loss: 9.386e-02 
+25-10-23 16:40:14.719 : <epoch: 30, iter:  17,200, lr:1.000e-04> G_loss: 1.027e-01 
+25-10-23 16:42:26.528 : <epoch: 32, iter:  17,400, lr:1.000e-04> G_loss: 8.864e-02 
+25-10-23 16:45:08.441 : <epoch: 35, iter:  17,600, lr:1.000e-04> G_loss: 7.443e-02 
+25-10-23 16:47:51.670 : <epoch: 38, iter:  17,800, lr:1.000e-04> G_loss: 9.200e-02 
+25-10-23 16:50:33.617 : <epoch: 41, iter:  18,000, lr:1.000e-04> G_loss: 7.381e-02 
+25-10-23 16:52:47.718 : <epoch: 43, iter:  18,200, lr:1.000e-04> G_loss: 8.484e-02 
+25-10-23 16:55:30.472 : <epoch: 46, iter:  18,400, lr:1.000e-04> G_loss: 8.778e-02 
+25-10-23 16:58:16.927 : <epoch: 49, iter:  18,600, lr:1.000e-04> G_loss: 6.289e-02 
+25-10-23 17:01:01.762 : <epoch: 52, iter:  18,800, lr:1.000e-04> G_loss: 7.185e-02 
+25-10-23 17:03:22.174 : <epoch: 54, iter:  19,000, lr:1.000e-04> G_loss: 7.760e-02 
+25-10-23 17:06:03.240 : <epoch: 57, iter:  19,200, lr:1.000e-04> G_loss: 5.430e-02 
+25-10-23 17:08:39.549 : <epoch: 60, iter:  19,400, lr:1.000e-04> G_loss: 5.978e-02 
+25-10-23 17:11:27.128 : <epoch: 63, iter:  19,600, lr:1.000e-04> G_loss: 5.450e-02 
+25-10-23 17:13:44.494 : <epoch: 65, iter:  19,800, lr:1.000e-04> G_loss: 5.964e-02 
+25-10-23 17:16:34.802 : <epoch: 68, iter:  20,000, lr:1.000e-04> G_loss: 5.266e-02 
+25-10-23 17:16:34.803 : Saving the model.
+25-10-23 17:16:39.758 : ---1-->   baby.bmp | 27.15dB
+25-10-23 17:16:39.813 : ---2-->   bird.bmp | 20.93dB
+25-10-23 17:16:39.860 : ---3--> butterfly.bmp | 19.33dB
+25-10-23 17:16:39.906 : ---4-->   head.bmp | 22.48dB
+25-10-23 17:16:39.953 : ---5-->  woman.bmp | 22.78dB
+25-10-23 17:16:40.426 : <epoch: 68, iter:  20,000, Average PSNR : 22.53dB
+
+25-10-23 17:19:26.744 : <epoch: 71, iter:  20,200, lr:1.000e-04> G_loss: 4.928e-02 
+25-10-23 17:21:47.115 : <epoch: 73, iter:  20,400, lr:1.000e-04> G_loss: 5.854e-02 
+25-10-23 17:24:22.750 : <epoch: 76, iter:  20,600, lr:1.000e-04> G_loss: 4.845e-02 
+25-10-23 17:27:06.580 : <epoch: 79, iter:  20,800, lr:1.000e-04> G_loss: 5.488e-02 
+25-10-23 17:29:49.930 : <epoch: 82, iter:  21,000, lr:1.000e-04> G_loss: 4.912e-02 
+25-10-23 17:32:11.276 : <epoch: 84, iter:  21,200, lr:1.000e-04> G_loss: 5.404e-02 
+25-10-23 17:34:48.955 : <epoch: 87, iter:  21,400, lr:1.000e-04> G_loss: 5.326e-02 
+25-10-23 17:37:25.588 : <epoch: 90, iter:  21,600, lr:1.000e-04> G_loss: 5.844e-02 
+25-10-23 17:40:03.664 : <epoch: 93, iter:  21,800, lr:1.000e-04> G_loss: 4.939e-02 
+25-10-23 17:42:18.883 : <epoch: 95, iter:  22,000, lr:1.000e-04> G_loss: 6.715e-02 
+25-10-23 17:45:02.270 : <epoch: 98, iter:  22,200, lr:1.000e-04> G_loss: 6.001e-02 
+25-10-23 17:47:46.962 : <epoch:101, iter:  22,400, lr:1.000e-04> G_loss: 4.884e-02 
+25-10-23 17:50:26.509 : <epoch:104, iter:  22,600, lr:1.000e-04> G_loss: 5.798e-02 
+25-10-23 17:52:40.640 : <epoch:106, iter:  22,800, lr:1.000e-04> G_loss: 5.650e-02 
+25-10-23 17:55:24.979 : <epoch:109, iter:  23,000, lr:1.000e-04> G_loss: 5.536e-02 
+25-10-23 17:58:08.902 : <epoch:112, iter:  23,200, lr:1.000e-04> G_loss: 5.572e-02 
+25-10-23 18:00:52.449 : <epoch:115, iter:  23,400, lr:1.000e-04> G_loss: 6.009e-02 
+25-10-23 18:03:14.683 : <epoch:117, iter:  23,600, lr:1.000e-04> G_loss: 5.659e-02 
+25-10-23 18:05:57.427 : <epoch:120, iter:  23,800, lr:1.000e-04> G_loss: 5.840e-02 
+25-10-23 18:08:41.959 : <epoch:123, iter:  24,000, lr:1.000e-04> G_loss: 4.047e-02 
+25-10-23 18:11:28.197 : <epoch:126, iter:  24,200, lr:1.000e-04> G_loss: 4.926e-02 
+25-10-23 18:13:49.633 : <epoch:128, iter:  24,400, lr:1.000e-04> G_loss: 4.820e-02 
+25-10-23 18:16:36.610 : <epoch:131, iter:  24,600, lr:1.000e-04> G_loss: 5.263e-02 
+25-10-23 18:19:21.854 : <epoch:134, iter:  24,800, lr:1.000e-04> G_loss: 4.837e-02 
+25-10-23 18:21:45.389 : <epoch:136, iter:  25,000, lr:1.000e-04> G_loss: 6.280e-02 
+25-10-23 18:21:45.389 : Saving the model.
+25-10-23 18:21:48.489 : ---1-->   baby.bmp | 25.57dB
+25-10-23 18:21:48.576 : ---2-->   bird.bmp | 19.64dB
+25-10-23 18:21:48.606 : ---3--> butterfly.bmp | 19.53dB
+25-10-23 18:21:48.637 : ---4-->   head.bmp | 21.85dB
+25-10-23 18:21:48.667 : ---5-->  woman.bmp | 23.16dB
+25-10-23 18:21:48.950 : <epoch:136, iter:  25,000, Average PSNR : 21.95dB
+
+25-10-23 18:24:33.069 : <epoch:139, iter:  25,200, lr:1.000e-04> G_loss: 4.586e-02 
+25-10-23 18:27:20.419 : <epoch:142, iter:  25,400, lr:1.000e-04> G_loss: 5.241e-02 
+25-10-23 18:30:03.051 : <epoch:145, iter:  25,600, lr:1.000e-04> G_loss: 4.824e-02 
+25-10-23 18:32:25.905 : <epoch:147, iter:  25,800, lr:1.000e-04> G_loss: 5.265e-02 
+25-10-23 18:35:10.237 : <epoch:150, iter:  26,000, lr:1.000e-04> G_loss: 5.021e-02 
+25-10-23 18:37:52.480 : <epoch:153, iter:  26,200, lr:1.000e-04> G_loss: 5.799e-02 
+25-10-23 18:40:37.691 : <epoch:156, iter:  26,400, lr:1.000e-04> G_loss: 5.438e-02 
+25-10-23 18:43:00.088 : <epoch:158, iter:  26,600, lr:1.000e-04> G_loss: 5.586e-02 
+25-10-23 18:45:45.808 : <epoch:161, iter:  26,800, lr:1.000e-04> G_loss: 5.492e-02 
+25-10-23 18:48:29.817 : <epoch:164, iter:  27,000, lr:1.000e-04> G_loss: 4.583e-02 
+25-10-23 18:51:17.301 : <epoch:167, iter:  27,200, lr:1.000e-04> G_loss: 4.229e-02 
+25-10-23 18:53:40.136 : <epoch:169, iter:  27,400, lr:1.000e-04> G_loss: 4.645e-02 
+25-10-23 18:56:25.622 : <epoch:172, iter:  27,600, lr:1.000e-04> G_loss: 6.023e-02 
+25-10-23 18:59:11.451 : <epoch:175, iter:  27,800, lr:1.000e-04> G_loss: 4.520e-02 
+25-10-23 19:01:54.880 : <epoch:178, iter:  28,000, lr:1.000e-04> G_loss: 5.354e-02 
+25-10-23 19:04:16.784 : <epoch:180, iter:  28,200, lr:1.000e-04> G_loss: 5.009e-02 
+25-10-23 19:06:59.888 : <epoch:183, iter:  28,400, lr:1.000e-04> G_loss: 5.854e-02 
+25-10-23 19:09:43.985 : <epoch:186, iter:  28,600, lr:1.000e-04> G_loss: 4.727e-02 
+25-10-23 19:12:28.086 : <epoch:189, iter:  28,800, lr:1.000e-04> G_loss: 5.938e-02 
+25-10-23 19:14:52.941 : <epoch:191, iter:  29,000, lr:1.000e-04> G_loss: 4.933e-02 
+25-10-23 19:17:40.560 : <epoch:194, iter:  29,200, lr:1.000e-04> G_loss: 4.413e-02 
+25-10-23 19:20:26.620 : <epoch:197, iter:  29,400, lr:1.000e-04> G_loss: 4.122e-02 
+25-10-23 19:22:49.599 : <epoch:199, iter:  29,600, lr:1.000e-04> G_loss: 4.279e-02 
+25-10-23 19:25:33.595 : <epoch:202, iter:  29,800, lr:1.000e-04> G_loss: 4.966e-02 
+25-10-23 19:28:19.986 : <epoch:205, iter:  30,000, lr:1.000e-04> G_loss: 4.794e-02 
+25-10-23 19:28:19.986 : Saving the model.
+25-10-23 19:28:24.820 : ---1-->   baby.bmp | 29.03dB
+25-10-23 19:28:24.946 : ---2-->   bird.bmp | 23.36dB
+25-10-23 19:28:24.982 : ---3--> butterfly.bmp | 21.53dB
+25-10-23 19:28:25.016 : ---4-->   head.bmp | 24.43dB
+25-10-23 19:28:25.046 : ---5-->  woman.bmp | 24.48dB
+25-10-23 19:28:25.464 : <epoch:205, iter:  30,000, Average PSNR : 24.56dB
+
+25-10-23 19:31:03.376 : <epoch:208, iter:  30,200, lr:1.000e-04> G_loss: 4.656e-02 
+25-10-23 19:33:26.701 : <epoch:210, iter:  30,400, lr:1.000e-04> G_loss: 4.375e-02 
+25-10-23 19:36:10.475 : <epoch:213, iter:  30,600, lr:1.000e-04> G_loss: 4.192e-02 
+25-10-23 19:38:52.767 : <epoch:216, iter:  30,800, lr:1.000e-04> G_loss: 4.488e-02 
+25-10-23 19:41:37.191 : <epoch:219, iter:  31,000, lr:1.000e-04> G_loss: 3.899e-02 
+25-10-23 19:44:00.603 : <epoch:221, iter:  31,200, lr:1.000e-04> G_loss: 4.294e-02 
+25-10-23 19:46:46.217 : <epoch:224, iter:  31,400, lr:1.000e-04> G_loss: 4.576e-02 
+25-10-23 19:49:30.131 : <epoch:227, iter:  31,600, lr:1.000e-04> G_loss: 4.288e-02 
+25-10-23 19:52:16.952 : <epoch:230, iter:  31,800, lr:1.000e-04> G_loss: 3.860e-02 
+25-10-23 19:54:37.364 : <epoch:232, iter:  32,000, lr:1.000e-04> G_loss: 3.494e-02 
+25-10-23 19:57:23.556 : <epoch:235, iter:  32,200, lr:1.000e-04> G_loss: 3.836e-02 
+25-10-23 20:00:07.418 : <epoch:238, iter:  32,400, lr:1.000e-04> G_loss: 4.258e-02 
+25-10-23 20:02:49.633 : <epoch:241, iter:  32,600, lr:1.000e-04> G_loss: 5.167e-02 
+25-10-23 20:05:11.263 : <epoch:243, iter:  32,800, lr:1.000e-04> G_loss: 4.406e-02 
+25-10-23 20:07:54.549 : <epoch:246, iter:  33,000, lr:1.000e-04> G_loss: 3.119e-02 
+25-10-23 20:10:39.462 : <epoch:249, iter:  33,200, lr:1.000e-04> G_loss: 3.304e-02 
+25-10-23 20:13:24.901 : <epoch:252, iter:  33,400, lr:1.000e-04> G_loss: 4.172e-02 
+25-10-23 20:15:49.946 : <epoch:254, iter:  33,600, lr:1.000e-04> G_loss: 4.377e-02 
+25-10-23 20:18:39.636 : <epoch:257, iter:  33,800, lr:1.000e-04> G_loss: 4.004e-02 
+25-10-23 20:21:27.745 : <epoch:260, iter:  34,000, lr:1.000e-04> G_loss: 3.330e-02 
+25-10-23 20:24:12.934 : <epoch:263, iter:  34,200, lr:1.000e-04> G_loss: 3.449e-02 
+25-10-23 20:26:35.817 : <epoch:265, iter:  34,400, lr:1.000e-04> G_loss: 4.063e-02 
+25-10-23 20:29:21.295 : <epoch:268, iter:  34,600, lr:1.000e-04> G_loss: 4.238e-02 
+25-10-23 20:32:04.493 : <epoch:271, iter:  34,800, lr:1.000e-04> G_loss: 3.829e-02 
+25-10-23 20:34:26.075 : <epoch:273, iter:  35,000, lr:1.000e-04> G_loss: 4.381e-02 
+25-10-23 20:34:26.077 : Saving the model.
+25-10-23 20:34:29.212 : ---1-->   baby.bmp | 29.89dB
+25-10-23 20:34:29.242 : ---2-->   bird.bmp | 27.94dB
+25-10-23 20:34:29.271 : ---3--> butterfly.bmp | 22.42dB
+25-10-23 20:34:29.300 : ---4-->   head.bmp | 27.99dB
+25-10-23 20:34:29.331 : ---5-->  woman.bmp | 26.30dB
+25-10-23 20:34:29.621 : <epoch:273, iter:  35,000, Average PSNR : 26.91dB
+
+25-10-23 20:37:11.320 : <epoch:276, iter:  35,200, lr:1.000e-04> G_loss: 4.652e-02 
+25-10-23 20:39:55.739 : <epoch:279, iter:  35,400, lr:1.000e-04> G_loss: 4.391e-02 
+25-10-23 20:42:37.641 : <epoch:282, iter:  35,600, lr:1.000e-04> G_loss: 3.986e-02 
+25-10-23 20:45:01.462 : <epoch:284, iter:  35,800, lr:1.000e-04> G_loss: 3.212e-02 
+25-10-23 20:47:46.880 : <epoch:287, iter:  36,000, lr:1.000e-04> G_loss: 3.911e-02 
+25-10-23 20:50:31.961 : <epoch:290, iter:  36,200, lr:1.000e-04> G_loss: 3.900e-02 
+25-10-23 20:53:18.347 : <epoch:293, iter:  36,400, lr:1.000e-04> G_loss: 3.959e-02 
+25-10-23 20:55:42.059 : <epoch:295, iter:  36,600, lr:1.000e-04> G_loss: 3.425e-02 
+25-10-23 20:58:28.634 : <epoch:298, iter:  36,800, lr:1.000e-04> G_loss: 3.607e-02 
+25-10-23 21:01:12.886 : <epoch:301, iter:  37,000, lr:1.000e-04> G_loss: 3.987e-02 
+25-10-23 21:03:57.254 : <epoch:304, iter:  37,200, lr:1.000e-04> G_loss: 4.229e-02 
+25-10-23 21:06:18.933 : <epoch:306, iter:  37,400, lr:1.000e-04> G_loss: 3.783e-02 
+25-10-23 21:09:02.988 : <epoch:309, iter:  37,600, lr:1.000e-04> G_loss: 3.726e-02 
+25-10-23 21:11:46.076 : <epoch:312, iter:  37,800, lr:1.000e-04> G_loss: 3.825e-02 
+25-10-23 21:14:31.329 : <epoch:315, iter:  38,000, lr:1.000e-04> G_loss: 3.462e-02 
+25-10-23 21:16:55.607 : <epoch:317, iter:  38,200, lr:1.000e-04> G_loss: 3.779e-02 
+25-10-23 21:19:39.245 : <epoch:320, iter:  38,400, lr:1.000e-04> G_loss: 3.947e-02 
+25-10-23 21:22:26.628 : <epoch:323, iter:  38,600, lr:1.000e-04> G_loss: 4.405e-02 
+25-10-23 21:25:11.799 : <epoch:326, iter:  38,800, lr:1.000e-04> G_loss: 4.336e-02 
+25-10-23 21:27:34.828 : <epoch:328, iter:  39,000, lr:1.000e-04> G_loss: 4.047e-02 
+25-10-23 21:30:19.931 : <epoch:331, iter:  39,200, lr:1.000e-04> G_loss: 4.055e-02 
+25-10-23 21:33:06.453 : <epoch:334, iter:  39,400, lr:1.000e-04> G_loss: 4.295e-02 
+25-10-23 21:35:27.427 : <epoch:336, iter:  39,600, lr:1.000e-04> G_loss: 3.350e-02 
+25-10-23 21:38:10.368 : <epoch:339, iter:  39,800, lr:1.000e-04> G_loss: 4.709e-02 
+25-10-23 21:41:20.912 : <epoch:342, iter:  40,000, lr:1.000e-04> G_loss: 3.656e-02 
+25-10-23 21:41:20.912 : Saving the model.
+25-10-23 21:41:24.479 : ---1-->   baby.bmp | 31.21dB
+25-10-23 21:41:24.529 : ---2-->   bird.bmp | 28.48dB
+25-10-23 21:41:24.572 : ---3--> butterfly.bmp | 22.95dB
+25-10-23 21:41:24.614 : ---4-->   head.bmp | 28.91dB
+25-10-23 21:41:24.656 : ---5-->  woman.bmp | 27.09dB
+25-10-23 21:41:25.018 : <epoch:342, iter:  40,000, Average PSNR : 27.73dB
+
+25-10-23 21:44:33.406 : <epoch:345, iter:  40,200, lr:1.000e-04> G_loss: 3.862e-02 
+25-10-23 21:47:03.345 : <epoch:347, iter:  40,400, lr:1.000e-04> G_loss: 3.601e-02 
+25-10-23 21:49:45.596 : <epoch:350, iter:  40,600, lr:1.000e-04> G_loss: 3.035e-02 
+25-10-23 21:52:34.442 : <epoch:353, iter:  40,800, lr:1.000e-04> G_loss: 4.166e-02 
+25-10-23 21:55:25.196 : <epoch:356, iter:  41,000, lr:1.000e-04> G_loss: 3.017e-02 
+25-10-23 21:57:49.702 : <epoch:358, iter:  41,200, lr:1.000e-04> G_loss: 2.770e-02 
+25-10-23 22:00:30.775 : <epoch:361, iter:  41,400, lr:1.000e-04> G_loss: 4.230e-02 
+25-10-23 22:03:21.135 : <epoch:364, iter:  41,600, lr:1.000e-04> G_loss: 3.201e-02 
+25-10-23 22:06:12.064 : <epoch:367, iter:  41,800, lr:1.000e-04> G_loss: 3.911e-02 
+25-10-23 22:08:38.975 : <epoch:369, iter:  42,000, lr:1.000e-04> G_loss: 2.918e-02 
+25-10-23 22:11:29.706 : <epoch:372, iter:  42,200, lr:1.000e-04> G_loss: 3.244e-02 
+25-10-23 22:14:20.982 : <epoch:375, iter:  42,400, lr:1.000e-04> G_loss: 3.638e-02 
+25-10-23 22:17:10.958 : <epoch:378, iter:  42,600, lr:1.000e-04> G_loss: 3.567e-02 
+25-10-23 22:19:38.427 : <epoch:380, iter:  42,800, lr:1.000e-04> G_loss: 3.450e-02 
+25-10-23 22:22:27.956 : <epoch:383, iter:  43,000, lr:1.000e-04> G_loss: 3.171e-02 
+25-10-23 22:25:08.826 : <epoch:386, iter:  43,200, lr:1.000e-04> G_loss: 3.982e-02 
+25-10-23 22:27:57.456 : <epoch:389, iter:  43,400, lr:1.000e-04> G_loss: 3.552e-02 
+25-10-23 22:30:25.281 : <epoch:391, iter:  43,600, lr:1.000e-04> G_loss: 3.734e-02 
+25-10-23 22:33:15.030 : <epoch:394, iter:  43,800, lr:1.000e-04> G_loss: 2.524e-02 
+25-10-23 22:35:58.450 : <epoch:397, iter:  44,000, lr:1.000e-04> G_loss: 4.070e-02 
+25-10-23 22:38:20.775 : <epoch:399, iter:  44,200, lr:1.000e-04> G_loss: 3.461e-02 
+25-10-23 22:41:02.923 : <epoch:402, iter:  44,400, lr:1.000e-04> G_loss: 3.794e-02 
+25-10-23 22:43:48.979 : <epoch:405, iter:  44,600, lr:1.000e-04> G_loss: 4.744e-02 
+25-10-23 22:46:38.602 : <epoch:408, iter:  44,800, lr:1.000e-04> G_loss: 3.469e-02 
+25-10-23 22:49:01.038 : <epoch:410, iter:  45,000, lr:1.000e-04> G_loss: 3.596e-02 
+25-10-23 22:49:01.038 : Saving the model.
+25-10-23 22:49:04.273 : ---1-->   baby.bmp | 31.37dB
+25-10-23 22:49:04.301 : ---2-->   bird.bmp | 29.02dB
+25-10-23 22:49:04.333 : ---3--> butterfly.bmp | 23.03dB
+25-10-23 22:49:04.364 : ---4-->   head.bmp | 29.13dB
+25-10-23 22:49:04.393 : ---5-->  woman.bmp | 27.04dB
+25-10-23 22:49:04.691 : <epoch:410, iter:  45,000, Average PSNR : 27.92dB
+
+25-10-23 22:51:48.724 : <epoch:413, iter:  45,200, lr:1.000e-04> G_loss: 3.075e-02 
+25-10-23 22:54:33.246 : <epoch:416, iter:  45,400, lr:1.000e-04> G_loss: 3.026e-02 
+25-10-23 22:57:26.419 : <epoch:419, iter:  45,600, lr:1.000e-04> G_loss: 4.523e-02 
+25-10-23 22:59:58.126 : <epoch:421, iter:  45,800, lr:1.000e-04> G_loss: 2.967e-02 
+25-10-23 23:02:51.491 : <epoch:424, iter:  46,000, lr:1.000e-04> G_loss: 3.655e-02 
+25-10-23 23:05:37.726 : <epoch:427, iter:  46,200, lr:1.000e-04> G_loss: 3.704e-02 
+25-10-23 23:08:27.118 : <epoch:430, iter:  46,400, lr:1.000e-04> G_loss: 3.920e-02 
+25-10-23 23:10:57.942 : <epoch:432, iter:  46,600, lr:1.000e-04> G_loss: 3.650e-02 
+25-10-23 23:13:52.440 : <epoch:435, iter:  46,800, lr:1.000e-04> G_loss: 3.739e-02 
+25-10-23 23:16:48.007 : <epoch:438, iter:  47,000, lr:1.000e-04> G_loss: 3.194e-02 
+25-10-23 23:19:42.039 : <epoch:441, iter:  47,200, lr:1.000e-04> G_loss: 3.856e-02 
+25-10-23 23:22:12.926 : <epoch:443, iter:  47,400, lr:1.000e-04> G_loss: 4.160e-02 
+25-10-23 23:25:01.953 : <epoch:446, iter:  47,600, lr:1.000e-04> G_loss: 3.412e-02 
+25-10-23 23:27:46.420 : <epoch:449, iter:  47,800, lr:1.000e-04> G_loss: 4.412e-02 
+25-10-23 23:30:41.262 : <epoch:452, iter:  48,000, lr:1.000e-04> G_loss: 3.958e-02 
+25-10-23 23:33:11.999 : <epoch:454, iter:  48,200, lr:1.000e-04> G_loss: 3.058e-02 
+25-10-23 23:36:01.305 : <epoch:457, iter:  48,400, lr:1.000e-04> G_loss: 2.834e-02 
+25-10-23 23:38:44.130 : <epoch:460, iter:  48,600, lr:1.000e-04> G_loss: 3.052e-02 
+25-10-23 23:41:35.702 : <epoch:463, iter:  48,800, lr:1.000e-04> G_loss: 3.239e-02 
+25-10-23 23:44:02.331 : <epoch:465, iter:  49,000, lr:1.000e-04> G_loss: 4.533e-02 
+25-10-23 23:46:54.767 : <epoch:468, iter:  49,200, lr:1.000e-04> G_loss: 3.188e-02 
+25-10-23 23:49:46.609 : <epoch:471, iter:  49,400, lr:1.000e-04> G_loss: 3.492e-02 
+25-10-23 23:52:14.265 : <epoch:473, iter:  49,600, lr:1.000e-04> G_loss: 2.808e-02 
+25-10-23 23:55:06.285 : <epoch:476, iter:  49,800, lr:1.000e-04> G_loss: 3.639e-02 
+25-10-23 23:57:58.715 : <epoch:479, iter:  50,000, lr:1.000e-04> G_loss: 3.496e-02 
+25-10-23 23:57:58.715 : Saving the model.
+25-10-23 23:58:03.634 : ---1-->   baby.bmp | 31.82dB
+25-10-23 23:58:03.672 : ---2-->   bird.bmp | 29.52dB
+25-10-23 23:58:03.697 : ---3--> butterfly.bmp | 23.35dB
+25-10-23 23:58:03.734 : ---4-->   head.bmp | 29.49dB
+25-10-23 23:58:03.769 : ---5-->  woman.bmp | 27.18dB
+25-10-23 23:58:04.072 : <epoch:479, iter:  50,000, Average PSNR : 28.27dB
+
+25-10-24 00:00:50.674 : <epoch:482, iter:  50,200, lr:1.000e-04> G_loss: 3.812e-02 
+25-10-24 00:03:20.387 : <epoch:484, iter:  50,400, lr:1.000e-04> G_loss: 3.077e-02 
+25-10-24 00:06:14.996 : <epoch:487, iter:  50,600, lr:1.000e-04> G_loss: 3.564e-02 
+25-10-24 00:09:08.438 : <epoch:490, iter:  50,800, lr:1.000e-04> G_loss: 2.927e-02 
+25-10-24 00:12:04.180 : <epoch:493, iter:  51,000, lr:1.000e-04> G_loss: 2.620e-02 
+25-10-24 00:14:35.511 : <epoch:495, iter:  51,200, lr:1.000e-04> G_loss: 3.021e-02 
+25-10-24 00:17:29.594 : <epoch:498, iter:  51,400, lr:1.000e-04> G_loss: 3.525e-02 
+25-10-24 00:20:25.270 : <epoch:501, iter:  51,600, lr:1.000e-04> G_loss: 3.317e-02 
+25-10-24 00:23:20.635 : <epoch:504, iter:  51,800, lr:1.000e-04> G_loss: 3.294e-02 
+25-10-24 00:25:51.851 : <epoch:506, iter:  52,000, lr:1.000e-04> G_loss: 4.335e-02 
+25-10-24 00:28:48.904 : <epoch:509, iter:  52,200, lr:1.000e-04> G_loss: 3.584e-02 
+25-11-13 19:39:06.650 :   task: usrnet
+  model: plain4
+  gpu_ids: [0]
+  scale: 4
+  n_channels: 3
+  merge_bn: False
+  merge_bn_startpoint: 300000
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: usrnet
+      dataroot_H: trainsets/trainH
+      dataroot_L: None
+      H_size: 96
+      use_flip: True
+      use_rot: True
+      scales: [1, 2, 3, 4]
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 48
+      phase: train
+      scale: 4
+      n_channels: 3
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: usrnet
+      dataroot_H: testsets/set5
+      dataroot_L: None
+      phase: test
+      scale: 4
+      n_channels: 3
+    ]
+  ]
+  path:[
+    root: SR
+    pretrained_netG: SR\usrnet\models\50000_G.pth
+    task: SR\usrnet
+    log: SR\usrnet
+    options: SR\usrnet\options
+    models: SR\usrnet\models
+    images: SR\usrnet\images
+  ]
+  netG:[
+    net_type: usrnet
+    n_iter: 6
+    h_nc: 32
+    in_nc: 4
+    out_nc: 3
+    nc: [16, 32, 64, 64]
+    nb: 2
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: R
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 4
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [100000, 200000, 300000, 400000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 5000
+    checkpoint_save: 5000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+    G_optimizer_betas: [0.9, 0.999]
+    G_scheduler_restart_weights: 1
+    G_optimizer_reuse: False
+    G_param_strict: True
+    E_param_strict: True
+    E_decay: 0
+  ]
+  opt_path: options/train_usrnet.json
+  is_train: True
+  find_unused_parameters: False
+  use_static_graph: False
+  dist: False
+  num_gpu: 1
+
+25-11-13 19:39:06.651 : Random seed: 1088
+25-11-13 19:39:06.765 : Number of train images: 3,550, iters: 74
+25-11-13 19:39:08.997 : 
+Networks name: USRNet
+Params number: 590332
+Net structure:
+USRNet(
+  (d): DataNet()
+  (p): ResUNet(
+    (m_head): Conv2d(4, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (m_down1): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down2): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_down3): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): Conv2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+    )
+    (m_body): Sequential(
+      (0): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up3): Sequential(
+      (0): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up2): Sequential(
+      (0): ConvTranspose2d(64, 32, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_up1): Sequential(
+      (0): ConvTranspose2d(32, 16, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (2): ResBlock(
+        (res): Sequential(
+          (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (1): ReLU(inplace=True)
+          (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+    )
+    (m_tail): Conv2d(16, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (h): HyPaNet(
+    (mlp): Sequential(
+      (0): Conv2d(2, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): ReLU(inplace=True)
+      (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+      (3): ReLU(inplace=True)
+      (4): Conv2d(32, 12, kernel_size=(1, 1), stride=(1, 1))
+      (5): Softplus(beta=1.0, threshold=20.0)
+    )
+  )
+)
+
+25-11-13 19:39:09.062 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.001 | -0.134 |  0.125 |  0.041 | torch.Size([16, 4, 3, 3]) || p.m_head.weight
+ | -0.006 | -0.161 |  0.084 |  0.029 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.0.weight
+ | -0.005 | -0.170 |  0.132 |  0.028 | torch.Size([16, 16, 3, 3]) || p.m_down1.0.res.2.weight
+ | -0.004 | -0.213 |  0.188 |  0.030 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.0.weight
+ | -0.008 | -0.313 |  0.295 |  0.059 | torch.Size([16, 16, 3, 3]) || p.m_down1.1.res.2.weight
+ | -0.002 | -0.152 |  0.138 |  0.034 | torch.Size([32, 16, 2, 2]) || p.m_down1.2.weight
+ |  0.000 | -0.145 |  0.140 |  0.022 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.0.weight
+ | -0.000 | -0.153 |  0.138 |  0.023 | torch.Size([32, 32, 3, 3]) || p.m_down2.0.res.2.weight
+ | -0.001 | -0.238 |  0.220 |  0.029 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.0.weight
+ | -0.002 | -0.338 |  0.249 |  0.035 | torch.Size([32, 32, 3, 3]) || p.m_down2.1.res.2.weight
+ | -0.001 | -0.235 |  0.116 |  0.028 | torch.Size([64, 32, 2, 2]) || p.m_down2.2.weight
+ |  0.001 | -0.223 |  0.168 |  0.025 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.0.weight
+ | -0.000 | -0.182 |  0.185 |  0.027 | torch.Size([64, 64, 3, 3]) || p.m_down3.0.res.2.weight
+ |  0.000 | -0.168 |  0.145 |  0.025 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.0.weight
+ | -0.000 | -0.176 |  0.169 |  0.026 | torch.Size([64, 64, 3, 3]) || p.m_down3.1.res.2.weight
+ |  0.000 | -0.123 |  0.137 |  0.026 | torch.Size([64, 64, 2, 2]) || p.m_down3.2.weight
+ | -0.001 | -0.130 |  0.135 |  0.024 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.0.weight
+ | -0.000 | -0.163 |  0.143 |  0.028 | torch.Size([64, 64, 3, 3]) || p.m_body.0.res.2.weight
+ |  0.000 | -0.145 |  0.148 |  0.026 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.0.weight
+ | -0.000 | -0.175 |  0.196 |  0.028 | torch.Size([64, 64, 3, 3]) || p.m_body.1.res.2.weight
+ | -0.000 | -0.117 |  0.105 |  0.025 | torch.Size([64, 64, 2, 2]) || p.m_up3.0.weight
+ | -0.001 | -0.143 |  0.148 |  0.028 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.0.weight
+ |  0.000 | -0.195 |  0.287 |  0.029 | torch.Size([64, 64, 3, 3]) || p.m_up3.1.res.2.weight
+ | -0.001 | -0.185 |  0.161 |  0.027 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.0.weight
+ |  0.000 | -0.305 |  0.310 |  0.032 | torch.Size([64, 64, 3, 3]) || p.m_up3.2.res.2.weight
+ | -0.001 | -0.134 |  0.139 |  0.028 | torch.Size([64, 32, 2, 2]) || p.m_up2.0.weight
+ |  0.000 | -0.198 |  0.210 |  0.031 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.0.weight
+ |  0.000 | -0.358 |  0.374 |  0.042 | torch.Size([32, 32, 3, 3]) || p.m_up2.1.res.2.weight
+ |  0.001 | -0.275 |  0.242 |  0.045 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.0.weight
+ |  0.001 | -0.403 |  0.440 |  0.055 | torch.Size([32, 32, 3, 3]) || p.m_up2.2.res.2.weight
+ |  0.000 | -0.098 |  0.107 |  0.032 | torch.Size([32, 16, 2, 2]) || p.m_up1.0.weight
+ |  0.003 | -0.168 |  0.158 |  0.039 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.0.weight
+ | -0.004 | -0.609 |  0.453 |  0.065 | torch.Size([16, 16, 3, 3]) || p.m_up1.1.res.2.weight
+ |  0.006 | -0.240 |  0.250 |  0.037 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.0.weight
+ |  0.001 | -0.355 |  0.428 |  0.058 | torch.Size([16, 16, 3, 3]) || p.m_up1.2.res.2.weight
+ | -0.004 | -0.092 |  0.111 |  0.032 | torch.Size([3, 16, 3, 3]) || p.m_tail.weight
+ | -0.125 | -1.168 |  1.177 |  0.431 | torch.Size([32, 2, 1, 1]) || h.mlp.0.weight
+ |  0.247 | -0.409 |  0.823 |  0.363 | torch.Size([32]) || h.mlp.0.bias
+ |  0.027 | -0.496 |  0.388 |  0.090 | torch.Size([32, 32, 1, 1]) || h.mlp.2.weight
+ |  0.106 | -0.007 |  0.344 |  0.133 | torch.Size([32]) || h.mlp.2.bias
+ |  0.064 | -0.314 |  1.476 |  0.294 | torch.Size([12, 32, 1, 1]) || h.mlp.4.weight
+ |  0.136 | -0.211 |  1.240 |  0.420 | torch.Size([12]) || h.mlp.4.bias
+
+25-11-13 19:42:15.172 : <epoch:  2, iter:  50,200, lr:1.000e-04> G_loss: 3.749e-02 

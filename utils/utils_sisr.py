@@ -435,7 +435,7 @@ def p2o(psf, shape):
     otf[...,:psf.shape[2],:psf.shape[3]].copy_(psf)
     for axis, axis_size in enumerate(psf.shape[2:]):
         otf = torch.roll(otf, -int(axis_size / 2), dims=axis+2)
-    otf = torch.rfft(otf, 2, onesided=False)
+    otf = torch.fft.fft2(otf, norm="ortho")
     n_ops = torch.sum(torch.tensor(psf.shape).type_as(psf) * torch.log2(torch.tensor(psf.shape).type_as(psf)))
     otf[...,1][torch.abs(otf[...,1])<n_ops*2.22e-16] = torch.tensor(0).type_as(psf)
     return otf
@@ -467,7 +467,7 @@ def INVLS_pytorch(FB, FBC, F2B, FR, tau, sf=2):
     invWBR = cdiv(FBR, csum(invW, tau))
     FCBinvWBR = cmul(FBC, invWBR.repeat(1,1,sf,sf,1))
     FX = (FR-FCBinvWBR)/tau
-    Xest = torch.irfft(FX, 2, onesided=False)
+    Xest = torch.fft.ifft2(FX, norm="ortho")
     return Xest
 
 

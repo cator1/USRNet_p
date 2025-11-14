@@ -109,30 +109,51 @@ def cconj(t, inplace=False):
 
 def rfft(t):
     # Real-to-complex Discrete Fourier Transform
-    return torch.rfft(t, 2, onesided=False)
+    return torch.fft.fft2(t, norm="ortho")
 
 
 def irfft(t):
     # Complex-to-real Inverse Discrete Fourier Transform
-    return torch.irfft(t, 2, onesided=False)
+    return torch.fft.ifft2(t, norm="ortho")
 
 
 def fft(t):
     # Complex-to-complex Discrete Fourier Transform
-    return torch.fft(t, 2)
+    return torch.fft.fft2(t, norm="ortho")
 
 
 def ifft(t):
     # Complex-to-complex Inverse Discrete Fourier Transform
-    return torch.ifft(t, 2)
+    return torch.fft.ifft2(t, norm="ortho")
 
+
+# def p2o(psf, shape):
+#     '''
+#     Convert point-spread function to optical transfer function.
+#     otf = p2o(psf) computes the Fast Fourier Transform (FFT) of the
+#     point-spread function (PSF) array and creates the optical transfer
+#     function (OTF) array that is not influenced by the PSF off-centering.
+
+#     Args:
+#         psf: NxCxhxw
+#         shape: [H, W]
+
+#     Returns:
+#         otf: NxCxHxWx2
+#     '''
+#     otf = torch.zeros(psf.shape[:-2] + shape).type_as(psf)
+#     otf[...,:psf.shape[2],:psf.shape[3]].copy_(psf)
+#     for axis, axis_size in enumerate(psf.shape[2:]):
+#         otf = torch.roll(otf, -int(axis_size / 2), dims=axis+2)
+#     otf = torch.fft.fft2(otf, norm="ortho")
+#     n_ops = torch.sum(torch.tensor(psf.shape).type_as(psf) * torch.log2(torch.tensor(psf.shape).type_as(psf)))
+#     otf[..., 1][torch.abs(otf[..., 1]) < n_ops*2.22e-16] = torch.tensor(0).type_as(psf)
+#     return otf
 
 def p2o(psf, shape):
-    '''
-    Convert point-spread function to optical transfer function.
-    otf = p2o(psf) computes the Fast Fourier Transform (FFT) of the
-    point-spread function (PSF) array and creates the optical transfer
-    function (OTF) array that is not influenced by the PSF off-centering.
+    """
+    Convert point-spread function to optical transfer function (OTF).
+    Compatible with PyTorch >=1.8, keeps [real, imag] last dim format.
 
     Args:
         psf: NxCxhxw
@@ -140,15 +161,29 @@ def p2o(psf, shape):
 
     Returns:
         otf: NxCxHxWx2
-    '''
-    otf = torch.zeros(psf.shape[:-2] + shape).type_as(psf)
-    otf[...,:psf.shape[2],:psf.shape[3]].copy_(psf)
+    """
+    # 1. pad psf to desired shape
+    otf = torch.zeros(psf.shape[:-2] + shape, dtype=psf.dtype, device=psf.device)
+    otf[..., :psf.shape[2], :psf.shape[3]].copy_(psf)
+
+    # 2. circular shift to center
     for axis, axis_size in enumerate(psf.shape[2:]):
         otf = torch.roll(otf, -int(axis_size / 2), dims=axis+2)
-    otf = torch.rfft(otf, 2, onesided=False)
-    n_ops = torch.sum(torch.tensor(psf.shape).type_as(psf) * torch.log2(torch.tensor(psf.shape).type_as(psf)))
-    otf[..., 1][torch.abs(otf[..., 1]) < n_ops*2.22e-16] = torch.tensor(0).type_as(psf)
+
+    # 3. 2D FFT
+    otf_complex = torch.fft.fft2(otf, norm="ortho")  # complex tensor
+
+    # 4. convert to [real, imag] format
+    otf = torch.stack([otf_complex.real, otf_complex.imag], dim=-1)
+
+    # 5. small values set to zero
+    n_ops = torch.sum(torch.tensor(psf.shape, dtype=psf.dtype, device=psf.device) *
+                      torch.log2(torch.tensor(psf.shape, dtype=psf.dtype, device=psf.device)))
+    mask = torch.abs(otf) < n_ops * 2.22e-16
+    otf = torch.where(mask, torch.zeros_like(otf), otf)
+
     return otf
+
 
 
 def upsample(x, sf=3):
@@ -258,19 +293,59 @@ class ResUNet(nn.Module):
 """
 
 
+# class DataNet(nn.Module):
+#     def __init__(self):
+#         super(DataNet, self).__init__()
+
+#     def forward(self, x, FB, FBC, F2B, FBFy, alpha, sf):
+#         FR = FBFy + torch.rfft(alpha*x, 2, onesided=False)
+#         x1 = cmul(FB, FR)
+#         FBR = torch.mean(splits(x1, sf), dim=-1, keepdim=False)
+#         invW = torch.mean(splits(F2B, sf), dim=-1, keepdim=False)
+#         invWBR = cdiv(FBR, csum(invW, alpha))
+#         FCBinvWBR = cmul(FBC, invWBR.repeat(1, 1, sf, sf, 1))
+#         FX = (FR-FCBinvWBR)/alpha.unsqueeze(-1)
+#         Xest = torch.irfft(FX, 2, onesided=False)
+
+#         return Xest
+
 class DataNet(nn.Module):
     def __init__(self):
         super(DataNet, self).__init__()
 
     def forward(self, x, FB, FBC, F2B, FBFy, alpha, sf):
-        FR = FBFy + torch.rfft(alpha*x, 2, onesided=False)
+        # -------------------------------
+        # 1. 计算 alpha * x 的 FFT，保留 [real, imag] 最后一维
+        alpha_x = alpha * x
+        alpha_x_fft_complex = torch.fft.fft2(alpha_x, norm="ortho")  # complex tensor
+        alpha_x_fft = torch.stack([alpha_x_fft_complex.real, alpha_x_fft_complex.imag], dim=-1)
+
+        # -------------------------------
+        # 2. FR = FBFy + fft(alpha*x)
+        FR = FBFy + alpha_x_fft  # 保留 [real, imag] 格式
+
+        # -------------------------------
+        # 3. 复数乘法
         x1 = cmul(FB, FR)
+
+        # -------------------------------
+        # 4. 计算 FBR 和 invWBR
         FBR = torch.mean(splits(x1, sf), dim=-1, keepdim=False)
         invW = torch.mean(splits(F2B, sf), dim=-1, keepdim=False)
         invWBR = cdiv(FBR, csum(invW, alpha))
+
+        # -------------------------------
+        # 5. 再做复数乘法
         FCBinvWBR = cmul(FBC, invWBR.repeat(1, 1, sf, sf, 1))
-        FX = (FR-FCBinvWBR)/alpha.unsqueeze(-1)
-        Xest = torch.irfft(FX, 2, onesided=False)
+
+        # -------------------------------
+        # 6. FX 计算
+        FX = (FR - FCBinvWBR) / alpha.unsqueeze(-1)
+
+        # -------------------------------
+        # 7. IFFT 得到空间域结果
+        FX_complex = torch.complex(FX[..., 0], FX[..., 1])  # [real, imag] → complex
+        Xest = torch.fft.ifft2(FX_complex, norm="ortho").real  # 取实部
 
         return Xest
 
@@ -329,7 +404,10 @@ class USRNet(nn.Module):
         FBC = cconj(FB, inplace=False)
         F2B = r2c(cabs2(FB))
         STy = upsample(x, sf=sf)
-        FBFy = cmul(FBC, torch.rfft(STy, 2, onesided=False))
+        STy_complex = torch.fft.fft2(STy, norm="ortho")
+        STy_fft = torch.stack([STy_complex.real, STy_complex.imag], dim=-1)
+        FBFy = cmul(FBC, STy_fft)
+        # FBFy = cmul(FBC, torch.rfft(STy, 2, onesided=False))
         x = nn.functional.interpolate(x, scale_factor=sf, mode='nearest')
 
         # hyper-parameter, alpha & beta

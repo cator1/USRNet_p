@@ -232,6 +232,7 @@ class USRNet(nn.Module):
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
         self.h = HyPaNet(in_nc=2, out_nc=n_iter*2, channel=h_nc)
+        # recurrent iterations(k,N)
         self.n = n_iter
 
     def forward(self, x, k, sf, sigma):
