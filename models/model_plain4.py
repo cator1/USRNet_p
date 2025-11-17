@@ -21,3 +21,4 @@ class ModelPlain4(ModelPlain):
     # ----------------------------------------
     def netG_forward(self):
         self.E = self.netG(self.L, self.k, self.sf, self.sigma)
+

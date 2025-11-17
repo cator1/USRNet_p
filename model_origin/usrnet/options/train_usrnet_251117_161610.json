@@ -41,19 +41,17 @@
     }
   },
   "path": {
-    "root": "SR",
+    "root": "model_origin",
     "pretrained_netG": null,
-    "task": "SR\\usrnet",
-    "log": "SR\\usrnet",
-    "options": "SR\\usrnet\\options",
-    "models": "SR\\usrnet\\models",
-    "images": "SR\\usrnet\\images",
-    "pretrained_netE": null,
-    "pretrained_optimizerG": null
+    "task": "model_origin\\usrnet",
+    "log": "model_origin\\usrnet",
+    "options": "model_origin\\usrnet\\options",
+    "models": "model_origin\\usrnet\\models",
+    "images": "model_origin\\usrnet\\images"
   },
   "netG": {
     "net_type": "usrnet",
-    "n_iter": 6,
+    "n_iter": 8,
     "h_nc": 32,
     "in_nc": 4,
     "out_nc": 3,
@@ -115,7 +113,5 @@
   "find_unused_parameters": false,
   "use_static_graph": false,
   "dist": false,
-  "num_gpu": 1,
-  "rank": 0,
-  "world_size": 1
+  "num_gpu": 1
 }

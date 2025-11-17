@@ -144,6 +144,13 @@ class ModelPlain(ModelBase):
     """
 
     # ----------------------------------------
+    # change n_iter during training
+    # ----------------------------------------
+    def set_curr_iter(self, n_iter):
+        self.netG.curr_iter = n_iter
+
+
+    # ----------------------------------------
     # feed L/H data
     # ----------------------------------------
     def feed_data(self, data, need_H=True):

@@ -38,7 +38,7 @@ from models.select_model import define_Model
 '''
 
 
-def main(json_path='options/train_usrnet.json'):
+def main(json_path='options/train_usrnet_e.json'):
 
     '''
     # ----------------------------------------
@@ -154,9 +154,9 @@ def main(json_path='options/train_usrnet.json'):
             # -------------------------------
             # 1.5) random n_iter for each batch -->usrnet_experiment
             # -------------------------------
-            # rand_iter = random.randint(1, opt['netG']['n_iter'])
-            # model.set_curr_iter(rand_iter)
-            # print('current_step: {}, rand_iter: {}'.format(current_step, rand_iter))
+            rand_iter = random.randint(1, opt['netG']['n_iter'])
+            model.set_curr_iter(rand_iter)
+            print('current_step: {}, rand_iter: {}'.format(current_step, rand_iter))
 
             # -------------------------------
             # 2) feed patch pairs

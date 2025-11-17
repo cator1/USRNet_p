@@ -79,9 +79,26 @@ def define_G(opt):
 
 
     # ----------------------------------------
-    # USRNet
+    # USRNet_origin
     # ----------------------------------------
     if net_type == 'usrnet':  # USRNet
+        from models.network_usrnet_v0 import USRNet as net
+        netG = net(n_iter=opt_net['n_iter'],
+                   h_nc=opt_net['h_nc'],
+                   in_nc=opt_net['in_nc'],
+                   out_nc=opt_net['out_nc'],
+                   nc=opt_net['nc'],
+                   nb=opt_net['nb'],
+                   act_mode=opt_net['act_mode'],
+                   downsample_mode=opt_net['downsample_mode'],
+                   upsample_mode=opt_net['upsample_mode']
+                   )
+
+
+    # ----------------------------------------
+    # USRNet_pro
+    # ----------------------------------------
+    elif net_type == 'usrnet_1':  # USRNet
         from models.network_usrnet_v1 import USRNet as net
         netG = net(n_iter=opt_net['n_iter'],
                    h_nc=opt_net['h_nc'],

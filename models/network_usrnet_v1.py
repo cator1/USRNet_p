@@ -202,7 +202,7 @@ class DataNet(nn.Module):
 
 
 class HyPaNet(nn.Module):
-    def __init__(self, in_nc=2, out_nc=8, channel=64):
+    def __init__(self, in_nc=3, out_nc=2, channel=64):
         super(HyPaNet, self).__init__()
         self.mlp = nn.Sequential(
                 nn.Conv2d(in_nc, channel, 1, padding=0, bias=True),
@@ -231,9 +231,10 @@ class USRNet(nn.Module):
 
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
-        self.h = HyPaNet(in_nc=2, out_nc=n_iter*2, channel=h_nc)
-        # recurrent iterations(k,N)
-        self.n = n_iter
+        self.h = HyPaNet(in_nc=3, out_nc=2, channel=h_nc)
+        
+        self.curr_iter = n_iter
+        self.n_iter_max = n_iter
 
     def forward(self, x, k, sf, sigma):
         '''
@@ -252,13 +253,15 @@ class USRNet(nn.Module):
         FBFy = FBC*torch.fft.fftn(STy, dim=(-2,-1))
         x = nn.functional.interpolate(x, scale_factor=sf, mode='nearest')
 
-        # hyper-parameter, alpha & beta
-        ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma)), dim=1))
+        # # hyper-parameter, alpha & beta
+        # ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma)), dim=1))
 
         # unfolding
-        for i in range(self.n):
-            
-            x = self.d(x, FB, FBC, F2B, FBFy, ab[:, i:i+1, ...], sf)
-            x = self.p(torch.cat((x, ab[:, i+self.n:i+self.n+1, ...].repeat(1, 1, x.size(2), x.size(3))), dim=1))
+        for i in range(self.curr_iter):
+
+            t = np.float32(i / self.curr_iter)
+            ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma),torch.tensor(t).type_as(sigma).expand_as(sigma)), dim=1))
+            x = self.d(x, FB, FBC, F2B, FBFy, ab[:, 0:1, :, :], sf)
+            x = self.p(torch.cat((x, ab[:, 1:2, :, :].repeat(1, 1, x.size(2), x.size(3))), dim=1))
 
         return x

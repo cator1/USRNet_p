@@ -3,6 +3,10 @@ import torch.nn as nn
 import models.basicblock as B
 import numpy as np
 from utils import utils_image as util
+import torch.fft
+
+
+# for pytorch version >= 1.8.1
 
 
 """
@@ -30,130 +34,23 @@ def splits(a, sf):
     '''split a into sfxsf distinct blocks
 
     Args:
-        a: NxCxWxHx2
+        a: NxCxWxH
         sf: split factor
 
     Returns:
-        b: NxCx(W/sf)x(H/sf)x2x(sf^2)
+        b: NxCx(W/sf)x(H/sf)x(sf^2)
     '''
-    b = torch.stack(torch.chunk(a, sf, dim=2), dim=5)
-    b = torch.cat(torch.chunk(b, sf, dim=3), dim=5)
+    b = torch.stack(torch.chunk(a, sf, dim=2), dim=4)
+    b = torch.cat(torch.chunk(b, sf, dim=3), dim=4)
     return b
 
 
-def c2c(x):
-    return torch.from_numpy(np.stack([np.float32(x.real), np.float32(x.imag)], axis=-1))
-
-
-def r2c(x):
-    # convert real to complex
-    return torch.stack([x, torch.zeros_like(x)], -1)
-
-
-def cdiv(x, y):
-    # complex division
-    a, b = x[..., 0], x[..., 1]
-    c, d = y[..., 0], y[..., 1]
-    cd2 = c**2 + d**2
-    return torch.stack([(a*c+b*d)/cd2, (b*c-a*d)/cd2], -1)
-
-
-def crdiv(x, y):
-    # complex/real division
-    a, b = x[..., 0], x[..., 1]
-    return torch.stack([a/y, b/y], -1)
-
-
-def csum(x, y):
-    # complex + real
-    return torch.stack([x[..., 0] + y, x[..., 1]], -1)
-
-
-def cabs(x):
-    # modulus of a complex number
-    return torch.pow(x[..., 0]**2+x[..., 1]**2, 0.5)
-
-
-def cabs2(x):
-    return x[..., 0]**2+x[..., 1]**2
-
-
-def cmul(t1, t2):
-    '''complex multiplication
-
-    Args:
-        t1: NxCxHxWx2, complex tensor
-        t2: NxCxHxWx2
-
-    Returns:
-        output: NxCxHxWx2
-    '''
-    real1, imag1 = t1[..., 0], t1[..., 1]
-    real2, imag2 = t2[..., 0], t2[..., 1]
-    return torch.stack([real1 * real2 - imag1 * imag2, real1 * imag2 + imag1 * real2], dim=-1)
-
-
-def cconj(t, inplace=False):
-    '''complex's conjugation
-
-    Args:
-        t: NxCxHxWx2
-
-    Returns:
-        output: NxCxHxWx2
-    '''
-    c = t.clone() if not inplace else t
-    c[..., 1] *= -1
-    return c
-
-
-def rfft(t):
-    # Real-to-complex Discrete Fourier Transform
-    return torch.fft.fft2(t, norm="ortho")
-
-
-def irfft(t):
-    # Complex-to-real Inverse Discrete Fourier Transform
-    return torch.fft.ifft2(t, norm="ortho")
-
-
-def fft(t):
-    # Complex-to-complex Discrete Fourier Transform
-    return torch.fft.fft2(t, norm="ortho")
-
-
-def ifft(t):
-    # Complex-to-complex Inverse Discrete Fourier Transform
-    return torch.fft.ifft2(t, norm="ortho")
-
-
-# def p2o(psf, shape):
-#     '''
-#     Convert point-spread function to optical transfer function.
-#     otf = p2o(psf) computes the Fast Fourier Transform (FFT) of the
-#     point-spread function (PSF) array and creates the optical transfer
-#     function (OTF) array that is not influenced by the PSF off-centering.
-
-#     Args:
-#         psf: NxCxhxw
-#         shape: [H, W]
-
-#     Returns:
-#         otf: NxCxHxWx2
-#     '''
-#     otf = torch.zeros(psf.shape[:-2] + shape).type_as(psf)
-#     otf[...,:psf.shape[2],:psf.shape[3]].copy_(psf)
-#     for axis, axis_size in enumerate(psf.shape[2:]):
-#         otf = torch.roll(otf, -int(axis_size / 2), dims=axis+2)
-#     otf = torch.fft.fft2(otf, norm="ortho")
-#     n_ops = torch.sum(torch.tensor(psf.shape).type_as(psf) * torch.log2(torch.tensor(psf.shape).type_as(psf)))
-#     otf[..., 1][torch.abs(otf[..., 1]) < n_ops*2.22e-16] = torch.tensor(0).type_as(psf)
-#     return otf
-
 def p2o(psf, shape):
-    """
-    Convert point-spread function to optical transfer function (OTF).
-    Compatible with PyTorch >=1.8, keeps [real, imag] last dim format.
+    '''
+    Convert point-spread function to optical transfer function.
+    otf = p2o(psf) computes the Fast Fourier Transform (FFT) of the
+    point-spread function (PSF) array and creates the optical transfer
+    function (OTF) array that is not influenced by the PSF off-centering.
 
     Args:
         psf: NxCxhxw
@@ -161,29 +58,15 @@ def p2o(psf, shape):
 
     Returns:
         otf: NxCxHxWx2
-    """
-    # 1. pad psf to desired shape
-    otf = torch.zeros(psf.shape[:-2] + shape, dtype=psf.dtype, device=psf.device)
-    otf[..., :psf.shape[2], :psf.shape[3]].copy_(psf)
-
-    # 2. circular shift to center
+    '''
+    otf = torch.zeros(psf.shape[:-2] + shape).type_as(psf)
+    otf[...,:psf.shape[2],:psf.shape[3]].copy_(psf)
     for axis, axis_size in enumerate(psf.shape[2:]):
         otf = torch.roll(otf, -int(axis_size / 2), dims=axis+2)
-
-    # 3. 2D FFT
-    otf_complex = torch.fft.fft2(otf, norm="ortho")  # complex tensor
-
-    # 4. convert to [real, imag] format
-    otf = torch.stack([otf_complex.real, otf_complex.imag], dim=-1)
-
-    # 5. small values set to zero
-    n_ops = torch.sum(torch.tensor(psf.shape, dtype=psf.dtype, device=psf.device) *
-                      torch.log2(torch.tensor(psf.shape, dtype=psf.dtype, device=psf.device)))
-    mask = torch.abs(otf) < n_ops * 2.22e-16
-    otf = torch.where(mask, torch.zeros_like(otf), otf)
-
+    otf = torch.fft.fftn(otf, dim=(-2,-1))
+    #n_ops = torch.sum(torch.tensor(psf.shape).type_as(psf) * torch.log2(torch.tensor(psf.shape).type_as(psf)))
+    #otf[..., 1][torch.abs(otf[..., 1]) < n_ops*2.22e-16] = torch.tensor(0).type_as(psf)
     return otf
-
 
 
 def upsample(x, sf=3):
@@ -293,59 +176,20 @@ class ResUNet(nn.Module):
 """
 
 
-# class DataNet(nn.Module):
-#     def __init__(self):
-#         super(DataNet, self).__init__()
-
-#     def forward(self, x, FB, FBC, F2B, FBFy, alpha, sf):
-#         FR = FBFy + torch.rfft(alpha*x, 2, onesided=False)
-#         x1 = cmul(FB, FR)
-#         FBR = torch.mean(splits(x1, sf), dim=-1, keepdim=False)
-#         invW = torch.mean(splits(F2B, sf), dim=-1, keepdim=False)
-#         invWBR = cdiv(FBR, csum(invW, alpha))
-#         FCBinvWBR = cmul(FBC, invWBR.repeat(1, 1, sf, sf, 1))
-#         FX = (FR-FCBinvWBR)/alpha.unsqueeze(-1)
-#         Xest = torch.irfft(FX, 2, onesided=False)
-
-#         return Xest
-
 class DataNet(nn.Module):
     def __init__(self):
         super(DataNet, self).__init__()
 
     def forward(self, x, FB, FBC, F2B, FBFy, alpha, sf):
-        # -------------------------------
-        # 1. 计算 alpha * x 的 FFT，保留 [real, imag] 最后一维
-        alpha_x = alpha * x
-        alpha_x_fft_complex = torch.fft.fft2(alpha_x, norm="ortho")  # complex tensor
-        alpha_x_fft = torch.stack([alpha_x_fft_complex.real, alpha_x_fft_complex.imag], dim=-1)
 
-        # -------------------------------
-        # 2. FR = FBFy + fft(alpha*x)
-        FR = FBFy + alpha_x_fft  # 保留 [real, imag] 格式
-
-        # -------------------------------
-        # 3. 复数乘法
-        x1 = cmul(FB, FR)
-
-        # -------------------------------
-        # 4. 计算 FBR 和 invWBR
+        FR = FBFy + torch.fft.fftn(alpha*x, dim=(-2,-1))
+        x1 = FB.mul(FR)
         FBR = torch.mean(splits(x1, sf), dim=-1, keepdim=False)
         invW = torch.mean(splits(F2B, sf), dim=-1, keepdim=False)
-        invWBR = cdiv(FBR, csum(invW, alpha))
-
-        # -------------------------------
-        # 5. 再做复数乘法
-        FCBinvWBR = cmul(FBC, invWBR.repeat(1, 1, sf, sf, 1))
-
-        # -------------------------------
-        # 6. FX 计算
-        FX = (FR - FCBinvWBR) / alpha.unsqueeze(-1)
-
-        # -------------------------------
-        # 7. IFFT 得到空间域结果
-        FX_complex = torch.complex(FX[..., 0], FX[..., 1])  # [real, imag] → complex
-        Xest = torch.fft.ifft2(FX_complex, norm="ortho").real  # 取实部
+        invWBR = FBR.div(invW + alpha)
+        FCBinvWBR = FBC*invWBR.repeat(1, 1, sf, sf)
+        FX = (FR-FCBinvWBR)/alpha
+        Xest = torch.real(torch.fft.ifftn(FX, dim=(-2,-1)))
 
         return Xest
 
@@ -388,6 +232,7 @@ class USRNet(nn.Module):
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
         self.h = HyPaNet(in_nc=2, out_nc=n_iter*2, channel=h_nc)
+        # recurrent iterations(k,N)
         self.n = n_iter
 
     def forward(self, x, k, sf, sigma):
@@ -401,13 +246,10 @@ class USRNet(nn.Module):
         # initialization & pre-calculation
         w, h = x.shape[-2:]
         FB = p2o(k, (w*sf, h*sf))
-        FBC = cconj(FB, inplace=False)
-        F2B = r2c(cabs2(FB))
+        FBC = torch.conj(FB)
+        F2B = torch.pow(torch.abs(FB), 2)
         STy = upsample(x, sf=sf)
-        STy_complex = torch.fft.fft2(STy, norm="ortho")
-        STy_fft = torch.stack([STy_complex.real, STy_complex.imag], dim=-1)
-        FBFy = cmul(FBC, STy_fft)
-        # FBFy = cmul(FBC, torch.rfft(STy, 2, onesided=False))
+        FBFy = FBC*torch.fft.fftn(STy, dim=(-2,-1))
         x = nn.functional.interpolate(x, scale_factor=sf, mode='nearest')
 
         # hyper-parameter, alpha & beta
