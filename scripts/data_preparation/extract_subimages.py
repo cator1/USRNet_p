@@ -43,8 +43,8 @@ def main():
     opt['compression_level'] = 3
 
     # HR images
-    opt['input_folder'] = 'trainsets/trainH/DIV2K_train_HR'
-    opt['save_folder'] = 'trainsets/trainL/DIV2K_train_LR'
+    opt['input_folder'] = 'trainsets/trainH/Flickr2K_HR'
+    opt['save_folder'] = 'trainsets/trainL/Flickr2K_LR'
     opt['crop_size'] = 480
     opt['step'] = 240
     opt['thresh_size'] = 0

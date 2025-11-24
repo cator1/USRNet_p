@@ -141,7 +141,7 @@ def main(json_path='options/train_usrnet_e.json'):
     # ----------------------------------------
     '''
 
-    for epoch in range(1000000):  # keep running
+    for epoch in range(100):  # keep running
         for i, train_data in enumerate(train_loader):
 
             current_step += 1
@@ -154,9 +154,15 @@ def main(json_path='options/train_usrnet_e.json'):
             # -------------------------------
             # 1.5) random n_iter for each batch -->usrnet_experiment
             # -------------------------------
-            rand_iter = random.randint(1, opt['netG']['n_iter'])
-            model.set_curr_iter(rand_iter)
-            print('current_step: {}, rand_iter: {}'.format(current_step, rand_iter))
+            r = random.random()
+            if r < 0.33:
+                n_iter = random.randint(1, opt['netG']['n_iter']//2)
+            elif r < 0.66:
+                n_iter = random.randint(opt['netG']['n_iter']//2, opt['netG']['n_iter'])
+            else:
+                n_iter = opt['netG']['n_iter']
+
+            model.set_curr_iter(n_iter)
 
             # -------------------------------
             # 2) feed patch pairs

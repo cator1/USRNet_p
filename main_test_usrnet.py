@@ -18,7 +18,7 @@ from utils import utils_deblur
 from utils import utils_logger
 from utils import utils_sisr as sr
 from utils import utils_image as util
-from models.network_usrnet import USRNet as net
+from models.network_usrnet_v0 import USRNet as net
 
 
 '''
@@ -72,7 +72,7 @@ def main():
     # ----------------------------------------
     # Preparation
     # ----------------------------------------
-    model_name = 'usrnet'      # 'usrgan' | 'usrnet' | 'usrgan_tiny' | 'usrnet_tiny'
+    model_name = 'latest_G'      # 'usrgan' | 'usrnet' | 'usrgan_tiny' | 'usrnet_tiny'
     testset_name = 'set5'      # test set,  'set5' | 'srbsd68'
     test_sf = [4] if 'gan' in model_name else [2, 3, 4]  # scale factor, from {1,2,3,4}
 
@@ -88,9 +88,9 @@ def main():
     kernels = loadmat(os.path.join('kernels', 'kernels_12.mat'))['kernels']
 
     n_channels = 1 if 'gray' in  model_name else 3  # 3 for color image, 1 for grayscale image
-    model_pool = 'model_zoo'  # fixed
+    model_pool = 'results/origin/comparison/usrnet/models'  # fixed
     testsets = 'testsets'     # fixed
-    results = 'results'       # fixed
+    results = 'results_test/origin'       # fixed
     noise_level_img = 0       # fixed: 0, noise level for LR image
     noise_level_model = noise_level_img  # fixed, noise level of model, default 0
     result_name = testset_name + '_' + model_name
@@ -112,8 +112,8 @@ def main():
     # ----------------------------------------
     # load model
     # ----------------------------------------
-    if 'tiny' in model_name:
-        model = net(n_iter=6, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
+    if 'G' in model_name:
+        model = net(n_iter=8, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
                     nb=2, act_mode="R", downsample_mode='strideconv', upsample_mode="convtranspose")
     else:
         model = net(n_iter=8, h_nc=64, in_nc=4, out_nc=3, nc=[64, 128, 256, 512],

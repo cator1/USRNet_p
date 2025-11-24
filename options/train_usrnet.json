@@ -30,7 +30,7 @@
   }
 
   , "path": {
-    "root": "model_origin"
+    "root": "results/origin/comparison"
     , "pretrained_netG": null
   }
 
@@ -70,8 +70,8 @@
     , "G_regularizer_orthstep": null
     , "G_regularizer_clipstep": null
 
-    , "checkpoint_test": 5000
-    , "checkpoint_save": 5000
-    , "checkpoint_print": 200
+    , "checkpoint_test": 100
+    , "checkpoint_save": 100
+    , "checkpoint_print": 20
   }
 }
