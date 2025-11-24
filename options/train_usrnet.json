@@ -30,7 +30,7 @@
   }
 
   , "path": {
-    "root": "model_origin"
+    "root": "results/origin"
     , "pretrained_netG": null
   }
 
