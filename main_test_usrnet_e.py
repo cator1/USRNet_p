@@ -88,7 +88,7 @@ def main():
     kernels = loadmat(os.path.join('kernels', 'kernels_12.mat'))['kernels']
 
     n_channels = 1 if 'gray' in  model_name else 3  # 3 for color image, 1 for grayscale image
-    model_pool = 'results/experiments/usrnet/models'  # fixed
+    model_pool = 'results/experiments/comparison/usrnet/models'  # fixed
     testsets = 'testsets'     # fixed
     results = 'results_test/exp'       # fixed
     noise_level_img = 0       # fixed: 0, noise level for LR image
@@ -113,7 +113,7 @@ def main():
     # load model
     # ----------------------------------------
     if 'G' in model_name:
-        model = net(n_iter=8, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
+        model = net(n_iter=20, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
                     nb=2, act_mode="R", downsample_mode='strideconv', upsample_mode="convtranspose")
     else:
         model = net(n_iter=8, h_nc=64, in_nc=4, out_nc=3, nc=[64, 128, 256, 512],
