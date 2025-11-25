@@ -202,7 +202,7 @@ class DataNet(nn.Module):
 
 
 class HyPaNet(nn.Module):
-    def __init__(self, in_nc=3, out_nc=2, channel=64):
+    def __init__(self, in_nc=4, out_nc=2, channel=64):
         super(HyPaNet, self).__init__()
         self.mlp = nn.Sequential(
                 nn.Conv2d(in_nc, channel, 1, padding=0, bias=True),
@@ -253,6 +253,7 @@ class USRNet(nn.Module):
         FBFy = FBC*torch.fft.fftn(STy, dim=(-2,-1))
         x = nn.functional.interpolate(x, scale_factor=sf, mode='nearest')
 
+        n_inv = np.float32(1.0/self.curr_iter)
         # # hyper-parameter, alpha & beta
         # ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma)), dim=1))
 
@@ -260,7 +261,7 @@ class USRNet(nn.Module):
         for i in range(self.curr_iter):
 
             t = np.float32(i / self.curr_iter)
-            ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma),torch.tensor(t).type_as(sigma).expand_as(sigma)), dim=1))
+            ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma),torch.tensor(t).type_as(sigma).expand_as(sigma),torch.tensor(n_inv).type_as(sigma).expand_as(sigma)), dim=1))
             x = self.d(x, FB, FBC, F2B, FBFy, ab[:, 0:1, :, :], sf)
             x = self.p(torch.cat((x, ab[:, 1:2, :, :].repeat(1, 1, x.size(2), x.size(3))), dim=1))
 
