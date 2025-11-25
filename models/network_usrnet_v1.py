@@ -231,7 +231,7 @@ class USRNet(nn.Module):
 
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
-        self.h = HyPaNet(in_nc=3, out_nc=2, channel=h_nc)
+        self.h = HyPaNet(in_nc=4, out_nc=2, channel=h_nc)
         
         self.curr_iter = n_iter
         self.n_iter_max = n_iter
