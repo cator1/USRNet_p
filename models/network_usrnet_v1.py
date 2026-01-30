@@ -4,6 +4,7 @@ import models.basicblock as B
 import numpy as np
 from utils import utils_image as util
 import torch.fft
+import math
 
 
 # for pytorch version >= 1.8.1
@@ -202,20 +203,50 @@ class DataNet(nn.Module):
 
 
 class HyPaNet(nn.Module):
-    def __init__(self, in_nc=4, out_nc=2, channel=64):
+    def __init__(self, in_nc_global=2, in_nc_local=2, out_nc=2, channel=64):
         super(HyPaNet, self).__init__()
-        self.mlp = nn.Sequential(
-                nn.Conv2d(in_nc, channel, 1, padding=0, bias=True),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(channel, channel, 1, padding=0, bias=True),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(channel, out_nc, 1, padding=0, bias=True),
-                nn.Softplus())
 
-    def forward(self, x):
-        x = self.mlp(x) + 1e-6
-        return x
+        # --- Net A: 全局上下文网络 (Controller) ---
+        # 输入: sigma, sf
+        # 输出: FiLM 调制参数 gamma (scale) 和 delta (shift)
+        # 结构: Conv 1x1 -> ReLU -> Conv 1x1 -> ReLU -> Conv 1x1
+        self.global_net = nn.Sequential(
+            nn.Conv2d(in_nc_global, channel, 1, padding=0, bias=True),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(channel, channel, 1, padding=0, bias=True),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(channel, channel * 2, 1, padding=0, bias=True) # 输出 2*channel
+        )
 
+        # --- Net B: 时序动态网络 (Backbone) ---
+        # 第一部分: 特征提取
+        self.step_net_1 = nn.Sequential(
+            nn.Conv2d(in_nc_local, channel, 1, padding=0, bias=True),
+            nn.ReLU(inplace=True)
+        )
+        # 第二部分: 输出映射 (在 FiLM 调制之后)
+        self.step_net_2 = nn.Sequential(
+            nn.Conv2d(channel, out_nc, 1, padding=0, bias=True),
+            nn.Softplus() # 确保 alpha, beta 为正数
+        )
+
+    def forward(self, sigma, sf, t, n_inv):
+        # 计算全局参数
+        global_input = torch.cat((sigma, sf), dim=1)  # (N, 2, 1, 1)
+        film_params = self.global_net(global_input)  # (N, 2*channel, 1, 1)
+        gamma, delta = torch.chunk(film_params, 2, dim=1)
+
+        # 计算局部参数
+        local_input = torch.cat((t, n_inv), dim=1)  # (N, 2, 1, 1)
+        features = self.step_net_1(local_input)  # (N, channel, 1, 1)
+
+        # FiLM 调制
+        features = features * (1 + gamma) + delta  # (N, channel, 1, 1)
+
+        # 输出映射
+        out = self.step_net_2(features) + 1e-6 # (N, out_nc, 1, 1)
+
+        return out
 
 """
 # --------------------------------------------
@@ -231,12 +262,12 @@ class USRNet(nn.Module):
 
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
-        self.h = HyPaNet(in_nc=4, out_nc=2, channel=h_nc)
+   
+        self.h = HyPaNet(in_nc_global=2, in_nc_local=2, out_nc=2, channel=h_nc)
         
-        self.curr_iter = n_iter
-        self.n_iter_max = n_iter
+        self.n_iter = n_iter
 
-    def forward(self, x, k, sf, sigma):
+    def forward(self, x, k, sf, sigma, n_iter=None):
         '''
         x: tensor, NxCxWxH
         k: tensor, Nx(1,3)xwxh
@@ -253,16 +284,33 @@ class USRNet(nn.Module):
         FBFy = FBC*torch.fft.fftn(STy, dim=(-2,-1))
         x = nn.functional.interpolate(x, scale_factor=sf, mode='nearest')
 
-        n_inv = np.float32(1.0/self.curr_iter)
-        # # hyper-parameter, alpha & beta
-        # ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma)), dim=1))
+        # 确定本次前向传播的迭代次数
+        # 训练时通常使用 self.n_iter (可能被外部随机化)
+        # 测试时可以通过 n_iter 参数手动指定
+        current_iter = n_iter if n_iter is not None else self.n_iter
+
+        #数据预处理
+        sf_tensor = torch.tensor(sf).type_as(sigma).view(1, 1, 1, 1).expand_as(sigma)
+        n_inv_val = np.float32(1.0) / np.float32(current_iter)
+        n_inv_tensor = torch.tensor(n_inv_val).type_as(sigma).expand_as(sigma)
+        
 
         # unfolding
-        for i in range(self.curr_iter):
+        for i in range(current_iter):
 
-            t = np.float32(i / self.curr_iter)
-            ab = self.h(torch.cat((sigma, torch.tensor(sf).type_as(sigma).expand_as(sigma),torch.tensor(t).type_as(sigma).expand_as(sigma),torch.tensor(n_inv).type_as(sigma).expand_as(sigma)), dim=1))
-            x = self.d(x, FB, FBC, F2B, FBFy, ab[:, 0:1, :, :], sf)
-            x = self.p(torch.cat((x, ab[:, 1:2, :, :].repeat(1, 1, x.size(2), x.size(3))), dim=1))
+            t_val = np.float32(i/current_iter)
+            t_tensor = torch.tensor(t_val).type_as(sigma).expand_as(sigma)          
+            # 调用超参数预测
+            ab = self.h(sigma, sf_tensor, t_tensor, n_inv_tensor)
+            alpha = ab[:, 0:1, :, :]
+            beta  = ab[:, 1:2, :, :]
 
+            # 1. 求解数据子问题 (D Module)
+            x = self.d(x, FB, FBC, F2B, FBFy, alpha, sf)
+            
+            # 2. 求解先验子问题 (P Module)
+            # 将 beta 作为噪声水平图拼接到输入中
+            beta_map = beta.repeat(1, 1, x.size(2), x.size(3))
+            x = self.p(torch.cat((x, beta_map), dim=1))
+            
         return x
