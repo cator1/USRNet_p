@@ -19,6 +19,15 @@ class ModelPlain4(ModelPlain):
     # ----------------------------------------
     # feed (L, C) to netG and get E
     # ----------------------------------------
+
+    def set_curr_iter(self, n_iter):
+        self.curr_iter = n_iter
+
     def netG_forward(self):
-        self.E = self.netG(self.L, self.k, self.sf, self.sigma)
+        net_type = self.opt['netG']['net_type']
+
+        if net_type == 'usrnet_1':
+            self.E = self.netG(self.L, self.k, self.sf, self.sigma, n_iter=self.curr_iter)
+        else:
+            self.E = self.netG(self.L, self.k, self.sf, self.sigma)
 

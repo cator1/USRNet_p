@@ -154,15 +154,16 @@ def main(json_path='options/train_usrnet_e.json'):
             # -------------------------------
             # 1.5) random n_iter for each batch -->usrnet_experiment
             # -------------------------------
-            r = random.random()
-            if r < 0.33:
-                n_iter = random.randint(1, opt['netG']['n_iter']//2)
-            elif r < 0.66:
-                n_iter = random.randint(opt['netG']['n_iter']//2, opt['netG']['n_iter'])
-            else:
-                n_iter = opt['netG']['n_iter']
+            # r = random.random()
+            # if r < 0.33:
+            #     n_iter = random.randint(1, opt['netG']['n_iter']//2)
+            # elif r < 0.66:
+            #     n_iter = random.randint(opt['netG']['n_iter']//2, opt['netG']['n_iter'])
+            # else:
+            #     n_iter = opt['netG']['n_iter']
 
-            model.set_curr_iter(n_iter)
+            n_iter = opt['netG']['n_iter']   
+            model.set_curr_iter(n_iter) 
 
             # -------------------------------
             # 2) feed patch pairs

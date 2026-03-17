@@ -30,13 +30,13 @@
   }
 
   , "path": {
-    "root": "results/origin/k=4"
+    "root": "results/fix_k/origin/k4"
     , "pretrained_netG": null
   }
 
   , "netG": {
-    "net_type": "usrnet" // "usrnet" | "usrnet_1" 
-    , "n_iter": 8 // maximum iteration number
+    "net_type": "usrnet" // "usrnet" | "usrnet_1" | "drunet" | "unet"
+    , "n_iter": 4 // maximum iteration number
     , "h_nc": 32 // 64
     , "in_nc": 4
     , "out_nc": 3
@@ -70,8 +70,8 @@
     , "G_regularizer_orthstep": null
     , "G_regularizer_clipstep": null
 
-    , "checkpoint_test": 100
-    , "checkpoint_save": 100
-    , "checkpoint_print": 20
+    , "checkpoint_test": 1000
+    , "checkpoint_save": 1000
+    , "checkpoint_print": 100
   }
 }

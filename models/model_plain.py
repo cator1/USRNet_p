@@ -26,6 +26,9 @@ class ModelPlain(ModelBase):
         if self.opt_train['E_decay'] > 0:
             self.netE = define_G(opt).to(self.device).eval()
 
+        # 默认当前迭代数 = 配置文件中的 n_iter
+        self.curr_iter = self.opt['netG']['n_iter']
+
     """
     # ----------------------------------------
     # Preparation before training with data
@@ -147,7 +150,14 @@ class ModelPlain(ModelBase):
     # change n_iter during training
     # ----------------------------------------
     def set_curr_iter(self, n_iter):
-        self.netG.curr_iter = n_iter
+        self.curr_iter = int(n_iter)
+
+        target = self.netG.module if hasattr(self.netG, 'module') else self.netG
+
+        if hasattr(target, 'n_iter'):
+            target.n_iter = int(n_iter)
+        if hasattr(target, 'n'):
+            target.n = int(n_iter)
 
 
     # ----------------------------------------

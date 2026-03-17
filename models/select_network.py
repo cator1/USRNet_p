@@ -108,7 +108,8 @@ def define_G(opt):
                    nb=opt_net['nb'],
                    act_mode=opt_net['act_mode'],
                    downsample_mode=opt_net['downsample_mode'],
-                   upsample_mode=opt_net['upsample_mode']
+                   upsample_mode=opt_net['upsample_mode'],
+                   h_ablation_mode=opt_net.get('h_ablation_mode', 'full')
                    )
 
     # ----------------------------------------

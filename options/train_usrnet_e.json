@@ -30,7 +30,7 @@
   }
 
   , "path": {
-    "root": "results/experiments/comparison_v2"
+    "root": "results/var_k/ablation/no_t"
     , "pretrained_netG": null
   }
 
@@ -52,6 +52,7 @@
     , "init_type": "orthogonal" // "orthogonal" | "normal" | "uniform" | "xavier_normal" | "xavier_uniform" | "kaiming_normal" | "kaiming_uniform"
     , "init_bn_type": "uniform" // "uniform" | "constant"
     , "init_gain": 0.2
+    , "h_ablation_mode": "no_t" // "full" | "no_t" | "no_ninv" | "sigma_sf_only"
   }
 
   , "train": {
@@ -70,8 +71,8 @@
     , "G_regularizer_orthstep": null
     , "G_regularizer_clipstep": null
 
-    , "checkpoint_test": 100
-    , "checkpoint_save": 100
-    , "checkpoint_print": 20
+    , "checkpoint_test": 1000
+    , "checkpoint_save": 1000
+    , "checkpoint_print": 100
   }
 }

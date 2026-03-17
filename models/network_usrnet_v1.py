@@ -203,9 +203,9 @@ class DataNet(nn.Module):
 
 
 class HyPaNet(nn.Module):
-    def __init__(self, in_nc_global=2, in_nc_local=2, out_nc=2, channel=64):
+    def __init__(self, in_nc_global=2, in_nc_local=2, out_nc=2, channel=64, h_ablation_mode='full'):
         super(HyPaNet, self).__init__()
-
+        self.h_ablation_mode = h_ablation_mode
         # --- Net A: 全局上下文网络 (Controller) ---
         # 输入: sigma, sf
         # 输出: FiLM 调制参数 gamma (scale) 和 delta (shift)
@@ -236,6 +236,22 @@ class HyPaNet(nn.Module):
         film_params = self.global_net(global_input)  # (N, 2*channel, 1, 1)
         gamma, delta = torch.chunk(film_params, 2, dim=1)
 
+        # 根据消融模式屏蔽局部输入
+        if self.h_ablation_mode == 'full':
+            t_used = t
+            n_inv_used = n_inv
+        elif self.h_ablation_mode == 'no_t':
+            t_used = torch.zeros_like(t)
+            n_inv_used = n_inv
+        elif self.h_ablation_mode == 'no_ninv':
+            t_used = t
+            n_inv_used = torch.zeros_like(n_inv)
+        elif self.h_ablation_mode == 'sigma_sf_only':
+            t_used = torch.zeros_like(t)
+            n_inv_used = torch.zeros_like(n_inv)
+        else:
+            raise ValueError(f'Unknown h_ablation_mode: {self.h_ablation_mode}')
+
         # 计算局部参数
         local_input = torch.cat((t, n_inv), dim=1)  # (N, 2, 1, 1)
         features = self.step_net_1(local_input)  # (N, channel, 1, 1)
@@ -257,15 +273,16 @@ class HyPaNet(nn.Module):
 
 
 class USRNet(nn.Module):
-    def __init__(self, n_iter=8, h_nc=64, in_nc=4, out_nc=3, nc=[64, 128, 256, 512], nb=2, act_mode='R', downsample_mode='strideconv', upsample_mode='convtranspose'):
+    def __init__(self, n_iter=8, h_nc=64, in_nc=4, out_nc=3, nc=[64, 128, 256, 512], nb=2, act_mode='R', downsample_mode='strideconv', upsample_mode='convtranspose', h_ablation_mode='full'):
         super(USRNet, self).__init__()
 
         self.d = DataNet()
         self.p = ResUNet(in_nc=in_nc, out_nc=out_nc, nc=nc, nb=nb, act_mode=act_mode, downsample_mode=downsample_mode, upsample_mode=upsample_mode)
    
-        self.h = HyPaNet(in_nc_global=2, in_nc_local=2, out_nc=2, channel=h_nc)
+        self.h = HyPaNet(in_nc_global=2, in_nc_local=2, out_nc=2, channel=h_nc, h_ablation_mode=h_ablation_mode)
         
         self.n_iter = n_iter
+        h_ablation_mode=h_ablation_mode
 
     def forward(self, x, k, sf, sigma, n_iter=None):
         '''

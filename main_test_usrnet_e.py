@@ -77,8 +77,8 @@ def main():
     test_sf = [4] if 'gan' in model_name else [2, 3, 4]  # scale factor, from {1,2,3,4}
 
     show_img = False           # default: False
-    save_L = True              # save LR image
-    save_E = True              # save estimated image
+    save_L = False              # save LR image
+    save_E = False              # save estimated image
     save_LEH = False           # save zoomed LR, E and H images
 
     # ----------------------------------------
@@ -88,9 +88,9 @@ def main():
     kernels = loadmat(os.path.join('kernels', 'kernels_12.mat'))['kernels']
 
     n_channels = 1 if 'gray' in  model_name else 3  # 3 for color image, 1 for grayscale image
-    model_pool = 'results/experiments/comparison/usrnet/models'  # fixed
+    model_pool = 'results/var_k/k20/usrnet/models'  # fixed
     testsets = 'testsets'     # fixed
-    results = 'results_test/exp'       # fixed
+    results = 'results_test/var_k/exp3/k16'       # fixed
     noise_level_img = 0       # fixed: 0, noise level for LR image
     noise_level_model = noise_level_img  # fixed, noise level of model, default 0
     result_name = testset_name + '_' + model_name
@@ -113,7 +113,7 @@ def main():
     # load model
     # ----------------------------------------
     if 'G' in model_name:
-        model = net(n_iter=20, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
+        model = net(n_iter=16, h_nc=32, in_nc=4, out_nc=3, nc=[16, 32, 64, 64],
                     nb=2, act_mode="R", downsample_mode='strideconv', upsample_mode="convtranspose")
     else:
         model = net(n_iter=8, h_nc=64, in_nc=4, out_nc=3, nc=[64, 128, 256, 512],
